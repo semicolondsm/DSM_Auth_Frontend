@@ -1,1 +1,1 @@
-DSM_Auth_Frontend
+Auth
