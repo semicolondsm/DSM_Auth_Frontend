@@ -1,14 +1,28 @@
-import { BrowserRouter, Route } from 'react-router-dom'
+import { useEffect } from "react";
 
-import GlobalStyled from './GlobalStyled'
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import { Main } from './components'
+import GlobalStyled from "./GlobalStyled";
+
+import { Main, Login, Register, LoginClient } from "./components";
 
 function App() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
+
   return (
     <BrowserRouter>
       <GlobalStyled />
-      <Route path="/" component={Main} /> 
+      <Switch>
+        <Route
+          path="/login"
+          render={(props) => <Login my={true} {...props} />}
+        />
+        <Route path="/external/login" component={LoginClient} />
+        <Route path="/register" component={Register} />
+        <Route path="/" component={Main} />
+      </Switch>
     </BrowserRouter>
   );
 }
