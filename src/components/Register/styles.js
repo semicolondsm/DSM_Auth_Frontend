@@ -29,14 +29,19 @@ export const FirstWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 20px 25px;
 `;
 
 export const Slide = styled.div`
-  margin: 20px 0;
+  position: relative;
+  margin: 15px 0;
   padding: 10px 20px;
   color: black;
   font-size: 18px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   ${(props) =>
     props.none === false
       ? css`
@@ -71,7 +76,6 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button`
-  margin-left: 15px;
   padding: 7px 15px;
   border: none;
   outline: none;
@@ -83,9 +87,21 @@ export const Button = styled.button`
   transition: all 0.25s;
 
   &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 9px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-7px);
+    box-shadow: 0 14px 10px rgba(0, 0, 0, 0.2);
     color: white;
     background: #713eff;
   }
+`;
+
+export const CountP = styled.p`
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  top: -23px;
+  transform: translateX(-50%);
+  font-size: 14px;
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
 `;
