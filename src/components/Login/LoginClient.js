@@ -85,7 +85,6 @@ const LoginClient = (props) => {
             />
             <S.CButton onClick={login}>Login</S.CButton>
           </form>
-          <S.CA href="#">아이디나 비밀번호를 잃어버리셨나요 ?</S.CA>
         </S.ContentBox>
       </S.BodyWrapper>
     </S.Section>

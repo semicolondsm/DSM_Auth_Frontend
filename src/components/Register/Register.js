@@ -16,13 +16,39 @@ const Register = React.memo(() => {
   const [email, setEmail] = useState("");
   const [checkNum, setCheckNum] = useState("");
   const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
+  const [checkPass, setCheckPass] = useState("");
+  const [code, setCode] = useState("");
+  const [name, setName] = useState("");
+
   const inputEmail = useRef();
   const checkNumber = useRef();
   const temp = useRef();
+  const passState = useRef();
 
   useEffect(() => {
     Show("#email");
   }, []);
+
+  const register = () => {
+    axios({
+      url: "/auth/signup",
+      method: "post",
+      data: {
+        id,
+        password,
+        name,
+        email,
+        authCode: code,
+      },
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const EmailCheck = () => {
     if (state[0] === true) {
@@ -45,18 +71,17 @@ const Register = React.memo(() => {
     })
       .then((res) => {
         checkNumber.current = res.data.message;
+        setCountTime(300);
+
+        temp.current = setInterval(() => {
+          setCountTime((prev) => prev - 1);
+        }, 1000);
+        Show("#emailCheck");
+        setState([true, false, false]);
       })
       .catch((err) => {
         console.log(err);
       });
-
-    setCountTime(300);
-
-    temp.current = setInterval(() => {
-      setCountTime((prev) => prev - 1);
-    }, 1000);
-    Show("#emailCheck");
-    setState([true, false, false]);
   };
 
   useEffect(() => {
@@ -109,6 +134,14 @@ const Register = React.memo(() => {
       });
   };
 
+  useEffect(() => {
+    if (checkPass !== password) {
+      passState.current.style.color = "red";
+    } else {
+      passState.current.style.color = "black";
+    }
+  }, [checkPass]);
+
   return (
     <S.Section bgColor="black">
       <S.FirstWrapper>
@@ -156,8 +189,35 @@ const Register = React.memo(() => {
           />
           <S.Button onClick={checkId}>중복 체크</S.Button>
         </S.Slide>
-        <S.Slide none={state[2]} id="etc">
-          asd
+        <S.Slide column none={state[2]} id="etc">
+          <S.Input
+            bottom
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="이름을 입력하세요."
+          />
+          <S.Input
+            bottom
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="비밀번호를 입력하세요."
+          />
+          <S.Input
+            bottom
+            value={checkPass}
+            onChange={(e) => {
+              if (password != "") setCheckPass(e.target.value);
+            }}
+            placeholder="비밀번호를 한번 더 입력하세요."
+            ref={passState}
+          />
+          <S.Input
+            bottom
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+            placeholder="발급받은 코드를 입력해주세요."
+          />
+          <S.Button onClick={register}>회원가입 하기</S.Button>
         </S.Slide>
       </S.FirstWrapper>
     </S.Section>

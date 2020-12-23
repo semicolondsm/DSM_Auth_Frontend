@@ -50,6 +50,12 @@ export const Slide = styled.div`
       : css`
           visibility: visible;
         `}
+
+  ${(props) =>
+    props.column &&
+    css`
+      flex-direction: column;
+    `}
 `;
 
 export const Img = styled.img`
@@ -67,12 +73,19 @@ export const Header = styled.p`
 
 export const Input = styled.input`
   width: 250px;
-  height: 45px;
+  height: 40px;
   border-radius: 5px;
   padding: 10px 12px;
   font-size: 16px;
   border: 1px solid #757575;
   outline: none;
+
+  ${(props) =>
+    props.bottom &&
+    css`
+      margin-bottom: 10px;
+      width: 280px;
+    `}
 `;
 
 export const Button = styled.button`
