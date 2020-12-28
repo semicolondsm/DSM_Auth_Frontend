@@ -13,7 +13,7 @@ export const HeaderAnimation = () => {
     trigger: "#headerPoint",
     start: "-=80",
     end: "top top",
-    toggleActions: "play pause pause reverse",
+    toggleActions: "play play play reverse",
   });
 };
 

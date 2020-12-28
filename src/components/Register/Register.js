@@ -46,7 +46,7 @@ const Register = React.memo(() => {
         console.log(res);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response);
       });
   };
 
@@ -80,7 +80,7 @@ const Register = React.memo(() => {
         setState([true, false, false]);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response);
       });
   };
 
@@ -129,7 +129,7 @@ const Register = React.memo(() => {
         Show("etc");
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response);
         alert("아이디가 중복됩니다 !");
       });
   };
@@ -220,6 +220,7 @@ const Register = React.memo(() => {
           <S.Button onClick={register}>회원가입 하기</S.Button>
         </S.Slide>
       </S.FirstWrapper>
+      <S.LinkA to="/login">아이디가 있으신가요 ?</S.LinkA>
     </S.Section>
   );
 });

@@ -53,7 +53,7 @@ const Login = (props) => {
       })
       .catch((err) => {
         alert("아이디나 비밀번호가 틀렸습니다.");
-        console.log(err);
+        console.log(err.response);
       });
   };
 
@@ -106,6 +106,7 @@ const Login = (props) => {
         </S.Agree>
         <LoginButton onSubmit={login} />
       </form>
+      <S.LinkA to="/register">아이디가 없으신가요 ?</S.LinkA>
     </S.Section>
   );
 };
