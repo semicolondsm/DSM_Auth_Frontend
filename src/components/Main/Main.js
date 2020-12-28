@@ -1,6 +1,7 @@
 import React from "react";
 import Api from "../Api/Api";
 import MainBody from "./MainBody";
+import Consumer from '../consumer/Consumer'
 
 import * as S from "./styles";
 
@@ -16,7 +17,7 @@ const Main = () => {
         <Switch>
           <Route exact path="/" component={MainBody} />
           <Route path="/api" component={Api} />
-          <Route path="/asd" component={() => <></>} />
+          <Route path="/comsumer" component={Consumer} />
         </Switch>
       </S.Wrapper>
     </>
