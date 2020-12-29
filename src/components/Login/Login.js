@@ -14,7 +14,6 @@ const Login = (props) => {
   const query = queryString.parse(props.location.search);
   const [id, setId] = useState("");
   const [password, setPass] = useState("");
-  const [error, setErr] = useState([false, false]);
   const check = useRef();
   const history = useHistory();
 

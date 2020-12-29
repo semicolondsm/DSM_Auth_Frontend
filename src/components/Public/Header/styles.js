@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const HeaderWrapper = styled.div`
   width: 100%;
@@ -29,10 +29,10 @@ export const LogoImg = styled.img`
 
 export const NaviWrapper = styled.div`
   display: flex;
-  margin-left: 35px;
+  margin-left: 15px;
 `;
 
-export const LinkStyle = styled(NavLink)`
+export const LinkStyle = styled(Link)`
   text-decoration: none;
   //color: #713EFF;
   color: white;
