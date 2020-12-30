@@ -53,11 +53,19 @@ export const Inter = styled.p`
   @media only screen and (max-width: 768px) {
     font-size: 15px;
     top: 10%;
+
+    ${(props) =>
+      props.on === true && css`
+        top: -50%;
+        transform: translateY(-100%);
+        left: 12px;
+        font-size: 16px;
+        color: white;
+      `}
   }
 
   ${(props) =>
-    props.on &&
-    css`
+    props.on === true && css`
       top: -50%;
       transform: translateY(-100%);
       left: 12px;

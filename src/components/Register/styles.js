@@ -84,8 +84,8 @@ export const Input = styled.input`
   ${(props) =>
     props.bottom &&
     css`
-      margin-bottom: 10px;
-      width: 280px;
+      margin-bottom: 20px;
+      width: 300px;
     `}
 `;
 

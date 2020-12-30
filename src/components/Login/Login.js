@@ -4,6 +4,8 @@ import * as S from "./styles";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
+import { useCookies } from  'react-cookie'
+
 import queryString from "query-string";
 
 import logo from "../../assets/ass.svg";
@@ -16,6 +18,29 @@ const Login = (props) => {
   const [password, setPass] = useState("");
   const check = useRef();
   const history = useHistory();
+  const [Rcookie, Rset, Rremove] = useCookies(['refresh-token'])
+  const [Acookie, Aset, Aremove] = useCookies(['access-token'])
+
+  useEffect(() => {
+    if(Rcookie['refresh-token'] !== undefined) {
+      axios({
+        method: 'get',
+        url: '/dsmauth/refresh',
+        headers: {
+          'refresh-token': `Bearer ${Rcookie['refresh-token']}`
+        }
+      })
+      .then(res => {
+        console.log(res)
+
+        Aset('access-token', res.data['access-token'], {expires: new Date(Date.now() + 1000 * 60 * 60 * 2)})
+        history.push('/')
+      })
+      .catch(err => {
+        console.log(err.response)
+      })
+    }
+  }, [])
 
   const login = (e) => {
     e.preventDefault();
@@ -36,6 +61,13 @@ const Login = (props) => {
       alert("아이디나 비밀번호를 입력하세요.");
       return;
     }
+    
+    console.log({
+      id,
+      password,
+      redirect_url,
+      client_id,
+    })
     axios({
       url: "/dsmauth/login",
       method: "post",
@@ -79,12 +111,11 @@ const Login = (props) => {
           <S.Input
             value={id}
             type="text"
-            onChange={(e) => {
-              setId(e.target.value);
-              console.log(e.target.value);
-            }}
+            onChange={(e) => 
+              setId(e.target.value)
+            }
           />
-          <S.Inter id="id1" on={id !== "" ? true : false}>
+          <S.Inter id="id1" on={id != "" ? true : false}>
             ID
           </S.Inter>
         </S.InputWrapper>
@@ -94,7 +125,7 @@ const Login = (props) => {
             type="password"
             onChange={(e) => setPass(e.target.value)}
           />
-          <S.Inter id="password1" on={password !== "" ? true : false}>
+          <S.Inter id="password1" on={password != "" ? true : false}>
             PASSWORD
           </S.Inter>
         </S.InputWrapper>

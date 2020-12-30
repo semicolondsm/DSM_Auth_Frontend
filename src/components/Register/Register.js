@@ -18,7 +18,6 @@ const Register = React.memo(() => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [checkPass, setCheckPass] = useState("");
-  const [code, setCode] = useState("");
   const [name, setName] = useState("");
 
   const inputEmail = useRef();
@@ -39,14 +38,17 @@ const Register = React.memo(() => {
         password,
         name,
         email,
-        authCode: code,
+        authcode: checkNumber.current,
       },
     })
       .then((res) => {
         console.log(res);
+        alert("회원가입 성공 !")
+        history.push('/')
       })
       .catch((err) => {
         console.log(err.response);
+        alert("회원가입 실패 !")
       });
   };
 
@@ -106,6 +108,7 @@ const Register = React.memo(() => {
     }
 
     inputEmail.current = 100;
+    clearInterval(temp.current);
     setState([true, true, false]);
     Show("#checkID");
   };
@@ -201,6 +204,7 @@ const Register = React.memo(() => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="비밀번호를 입력하세요."
+            type="password"
           />
           <S.Input
             bottom
@@ -210,12 +214,7 @@ const Register = React.memo(() => {
             }}
             placeholder="비밀번호를 한번 더 입력하세요."
             ref={passState}
-          />
-          <S.Input
-            bottom
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-            placeholder="발급받은 코드를 입력해주세요."
+            type="password"
           />
           <S.Button onClick={register}>회원가입 하기</S.Button>
         </S.Slide>

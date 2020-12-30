@@ -11,8 +11,6 @@ import queryString from 'query-string'
 
 import { FirstAnimation } from "../../animation";
 
-Refractor.registerLanguage(require("refractor/lang/javascript"));
-
 const MainBody = (props) => {
   const query = queryString.parse(props.location.search);
   const [Acookie, Aset, Aremove] = useCookies(['access-token'])
@@ -25,17 +23,15 @@ const MainBody = (props) => {
         url: '/dsmauth/token',
         data: {
           code: query.code,
-          client_id: "1234",
-          client_secret: "123456"
+          client_id: "123456",
+          client_secret: "1234"
         }
       })
       .then(res => {
         console.log(res)
-        const temp = new Date()
-        temp.setTime(temp.getTime() + 1000 * 60 * 60 * 3)
 
-        Aset('access-token', res.data['access-token'], {expries: temp})
-        Rset('refresh-token', res.data['refresh-token'], {expries: 14})
+        Aset('access-token', res.data['access-token'], {expires: new Date(Date.now() + 1000 * 60 * 60 * 2)})
+        Rset('refresh-token', res.data['refresh-token'], {expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 14)})
       })
       .catch(err => {
         console.log(err.response)

@@ -12,11 +12,11 @@ import logo from "../../../assets/ass.svg";
 const Header = (props) => {
   const history = useHistory();
   const [Acookie, Aset, Aremove] = useCookies(['access-token'])
-  const [Rcookie, Rset, Rremove] = useCookies(['refresh-token'])
   const [log, setLog] = useState(false)
+  const loginURI = "/login?redirect_url=http://localhost:3000&client_id=123456"
 
   useEffect(() => {
-    if(Acookie['access-token'] !== undefined || Rcookie['refresh-token'] !== undefined) {
+    if(Acookie['access-token'] !== undefined) {
       setLog(true)
     }
   }, [])
@@ -40,7 +40,7 @@ const Header = (props) => {
           </S.LinkStyle>
         </S.NaviWrapper>
         <S.NaviWrapper>
-          <S.LinkStyle to={log === false ? "/login" : "/consumer"} activeStyle={{ color: "#350871" }}>
+          <S.LinkStyle to={log === false ? loginURI : "/consumer"} activeStyle={{ color: "#350871" }}>
             {
               log === false ? "로그인" : "사용자 등록하기"
             }
