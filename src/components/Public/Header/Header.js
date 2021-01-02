@@ -10,7 +10,7 @@ import logo from "../../../assets/ass.svg";
 const Header = ({login, LogOut}) => {
   const history = useHistory();
   const [log, setLog] = useState(false)
-  const loginURI = "/login?redirect_url=http://localhost:3000&client_id=123456"
+  const loginURI = "/login"
 
   useEffect(() => {
     if(login === true) {

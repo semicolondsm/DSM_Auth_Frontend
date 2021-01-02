@@ -8,8 +8,6 @@ import { useCookies } from  'react-cookie'
 
 import queryString from "query-string";
 
-import { useDispatch } from 'react-redux'
-
 import logo from "../../assets/ass.svg";
 
 import LoginButton from "./LoginButton";
@@ -22,9 +20,9 @@ const Login = (props) => {
   const history = useHistory();
   const [Rcookie, Rset, Rremove] = useCookies(['refresh-token'])
   const [Acookie, Aset, Aremove] = useCookies(['access-token'])
-  const dispatch = useDispatch()
 
   useEffect(() => {
+    history.replace("login?redirect_url=http://localhost:3000&client_id=123456")
     if(Rcookie['refresh-token'] !== undefined) {
       axios({
         method: 'get',
