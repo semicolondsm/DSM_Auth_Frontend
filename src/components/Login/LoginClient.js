@@ -70,6 +70,7 @@ const LoginClient = (props) => {
               alignItems: "center",
               width: "100%",
             }}
+            method="GET"
           >
             <S.CInput
               value={id}
