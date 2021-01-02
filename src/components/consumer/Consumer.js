@@ -7,7 +7,7 @@ const Consumer = () => {
             <M.Section bgColor="black" height="500px">
 
             </M.Section>
-            <M.Section bgColor="black" height="500px">
+            <M.Section id="headerPoint" bgColor="black" height="500px">
 
             </M.Section>
             <M.Section bgColor="black" height="500px">

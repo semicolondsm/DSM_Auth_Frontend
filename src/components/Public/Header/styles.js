@@ -18,6 +18,10 @@ export const HeaderWrapper = styled.div`
     height: 50px;
     padding: 7px 30px;
   }
+
+  @media screen and (max-width: 424px) {
+    padding: 7px 20px;
+  }
 `;
 
 export const LogoImg = styled.img`
@@ -32,11 +36,23 @@ export const NaviWrapper = styled.div`
   margin-left: 15px;
 `;
 
-export const LinkStyle = styled(Link)`
-  text-decoration: none;
-  //color: #713EFF;
-  color: white;
-  font-size: 18px;
+const LStyle = `
+text-decoration: none;
+//color: #713EFF;
+color: white;
+font-size: 18px;
+background: rgba(0, 0, 0, 0);
+border: none;
+cursor: pointer;
+outline: none;
 
-  margin-left: 15px;
+margin-left: 15px;
+
+@media screen and (max-width: 424px) {
+  font-size: 14.5px;
+}
 `;
+
+export const LinkStyle = styled(Link)`${LStyle}`
+
+export const LinkStyleButton = styled.button`${LStyle}`

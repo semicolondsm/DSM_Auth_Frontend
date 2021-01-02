@@ -5,21 +5,20 @@ import { HeaderAnimation } from "../../../animation";
 
 import { useHistory } from "react-router-dom";
 
-import { useCookies } from 'react-cookie'
-
 import logo from "../../../assets/ass.svg";
 
-const Header = (props) => {
+const Header = ({login, LogOut}) => {
   const history = useHistory();
-  const [Acookie, Aset, Aremove] = useCookies(['access-token'])
   const [log, setLog] = useState(false)
   const loginURI = "/login?redirect_url=http://localhost:3000&client_id=123456"
 
   useEffect(() => {
-    if(Acookie['access-token'] !== undefined) {
+    if(login === true) {
       setLog(true)
+    } else {
+      setLog(false)
     }
-  }, [])
+  }, [login])
 
   useEffect(() => {
     HeaderAnimation();
@@ -40,11 +39,13 @@ const Header = (props) => {
           </S.LinkStyle>
         </S.NaviWrapper>
         <S.NaviWrapper>
-          <S.LinkStyle to={log === false ? loginURI : "/consumer"} activeStyle={{ color: "#350871" }}>
-            {
-              log === false ? "로그인" : "사용자 등록하기"
-            }
-          </S.LinkStyle>
+          {
+            log === false ? (
+              <S.LinkStyle to={loginURI} activeStyle={{ color: "#350871" }}>로그인</S.LinkStyle>
+            ) : (
+              <S.LinkStyleButton onClick={LogOut}>로그아웃</S.LinkStyleButton>
+            )
+          }
         </S.NaviWrapper>
       </S.NaviWrapper>
     </S.HeaderWrapper>
