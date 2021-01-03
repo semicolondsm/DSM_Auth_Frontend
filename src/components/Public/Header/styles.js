@@ -56,3 +56,26 @@ margin-left: 15px;
 export const LinkStyle = styled(Link)`${LStyle}`
 
 export const LinkStyleButton = styled.button`${LStyle}`
+
+export const MenuWrapper = styled.div`
+  position: relative;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  cursor: pointer;
+
+`
+
+export const Menu = styled.div`
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 20px;
+  display: flex;
+  background: white;
+  border-radius: 3px;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
+`

@@ -7,14 +7,37 @@ import { useHistory } from "react-router-dom";
 
 import logo from "../../../assets/ass.svg";
 
-const Header = ({login, LogOut}) => {
+import Menu from './Menu'
+
+import axios from 'axios'
+
+const Header = ({login, LogOut, AToken}) => {
   const history = useHistory();
   const [log, setLog] = useState(false)
+  const [name, setName] = useState('')
   const loginURI = "/login"
 
   useEffect(() => {
     if(login === true) {
       setLog(true)
+      if(sessionStorage.getItem('name') == undefined) {
+        axios({
+          method: 'get',
+          url: 'http://54.180.98.91:8090/v1/info/basic',
+          headers: {
+            'access-token': `Bearer ${AToken}`
+          }
+        })
+        .then(res => {
+          console.log(res)
+          setName(res.data.name)
+        })
+        .catch(err => {
+          console.log(err.response)
+        })
+      } else {
+        setName(sessionStorage.getItem('name'))
+      }
     } else {
       setLog(false)
     }
@@ -43,7 +66,7 @@ const Header = ({login, LogOut}) => {
             log === false ? (
               <S.LinkStyle to={loginURI} activeStyle={{ color: "#350871" }}>로그인</S.LinkStyle>
             ) : (
-              <S.LinkStyleButton onClick={LogOut}>로그아웃</S.LinkStyleButton>
+              <Menu name={name} LogOut={LogOut} />
             )
           }
         </S.NaviWrapper>

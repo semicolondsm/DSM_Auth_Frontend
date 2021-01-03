@@ -43,7 +43,6 @@ const Main = (props) => {
         }
       })
       .then(res => {
-        console.log(res)
         setLogin(true)
 
         Aset('access-token', res.data['access-token'], {expires: new Date(Date.now() + 1000 * 60 * 60 * 2)})
@@ -69,7 +68,7 @@ const Main = (props) => {
   return (
     <>
       <S.Wrapper>
-        <Header login={loginState} LogOut={LogOut} />
+        <Header AToken={Acookie['access-token']} login={loginState} LogOut={LogOut} />
         <Switch>
           <Route exact path="/" component={MainBody} />
           <Route path="/api" component={Api} />
