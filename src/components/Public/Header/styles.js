@@ -75,7 +75,8 @@ export const Menu = styled.div`
   transform: translateX(-50%);
   padding: 20px;
   display: flex;
-  background: white;
+  background: rgb(30, 30, 30);
   border-radius: 3px;
   box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
+  color: white;
 `
