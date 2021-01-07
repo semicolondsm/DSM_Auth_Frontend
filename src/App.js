@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import GlobalStyled from "./GlobalStyled";
 
-import { Main, Login, Register, LoginClient } from "./components";
+import { Main, Login, Register, LoginClient, Consumer } from "./components";
 
 function App() {
   useEffect(() => {
@@ -21,6 +21,7 @@ function App() {
         />
         <Route path="/external/login" component={LoginClient} />
         <Route path="/register" component={Register} />
+        <Route path="/consumer" component={Consumer} />
         <Route path="/" component={Main} />
       </Switch>
     </BrowserRouter>

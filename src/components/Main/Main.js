@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Api from "../Api/Api";
 import MainBody from "./MainBody";
-import Consumer from '../consumer/Consumer'
 
 import * as S from "./styles";
 
@@ -43,10 +42,10 @@ const Main = (props) => {
         }
       })
       .then(res => {
-        setLogin(true)
-
         Aset('access-token', res.data['access-token'], {expires: new Date(Date.now() + 1000 * 60 * 60 * 2)})
         Rset('refresh-token', res.data['refresh-token'], {expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 14)})
+        
+        setLogin(true)
       })
       .catch(err => {
         console.log(err.response)
@@ -72,7 +71,6 @@ const Main = (props) => {
         <Switch>
           <Route exact path="/" component={MainBody} />
           <Route path="/api" component={Api} />
-          <Route path="/consumer" component={Consumer} />
         </Switch>
       </S.Wrapper>
     </>
