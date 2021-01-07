@@ -26,13 +26,27 @@ export const ContentBox = styled.div`
 
 export const ListWrapper = styled.div`
     width: 70%;
-    height: 80%;
+    height: 65%;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
 
     &::-webkit-scrollbar {
         display: none;
+    }
+`
+
+export const Item = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 17px;
+    color: white;
+    border-bottom: 1px solid rgb(190, 190, 190);
+    padding: 20px 30px;
+
+    &:first-child {
+        border-top: 1px solid rgb(190, 190, 190);
     }
 `
 
