@@ -79,4 +79,5 @@ export const Menu = styled.div`
   border-radius: 3px;
   box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
   color: white;
+  flex-direction: column;
 `
