@@ -3,6 +3,8 @@ import * as S from "./styles";
 
 import Refractor from "react-refractor";
 
+import banner from "../../assets/banner.png";
+
 import { FirstAnimation } from "../../animation";
 
 const MainBody = () => {
@@ -18,14 +20,10 @@ const MainBody = () => {
 
   return (
     <S.BodyWrapper>
-      <S.Section
-        id="section1"
-        img="https://www.itl.cat/pngfile/big/109-1092015_huge-interstellar-photos-pictures-outer-space.png"
-        height="500px"
-      >
+      <S.Section id="section1" img={banner} height="500px">
         <S.ContentBox column></S.ContentBox>
       </S.Section>
-      <S.Section id="headerPoint" bgColor="black" height="500px">
+      <S.Section className="headerPoint" bgColor="black" height="500px">
         <S.ContentBox></S.ContentBox>
       </S.Section>
       <S.Section bgColor="black" height="500px">

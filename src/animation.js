@@ -10,7 +10,7 @@ export const HeaderAnimation = () => {
 
   ScrollTrigger.create({
     animation: asd,
-    trigger: "#headerPoint",
+    trigger: ".headerPoint",
     start: "-=80",
     end: "top top",
     toggleActions: "play play play reverse",
