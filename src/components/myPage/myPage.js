@@ -40,16 +40,24 @@ const MyPage = () => {
         <S.Wrapper>
             <S.ContentWrapper>
                 {
-                    infor[0].name
-                }<br />
-                {
-                    infor[0].domain_url
-                }<br />
-                {
-                    infor[0].client_id
-                }<br />
-                {
-                    infor[0].client_secret
+                    infor.map(inf => (
+                        <>
+                            {
+                                inf.name
+                            }<br />
+                            {
+                                inf.domain_url
+                            }<br />
+                            {
+                                inf.client_id
+                            }<br />
+                            {
+                                inf.client_secret
+                            }
+                            <br />
+                            <br />
+                        </>
+                    ))
                 }
             </S.ContentWrapper>
         </S.Wrapper>

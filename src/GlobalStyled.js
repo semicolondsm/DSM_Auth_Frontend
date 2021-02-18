@@ -19,7 +19,8 @@ const GlobalStyled = createGlobalStyle`
         user-select: none;
         -webkit-user-select: text;
         white-space: nowrap;
-        letter-spacing: -1px;
+        letter-spacing: -1.5px;
+        font-family: 'Noto Sans KR', sans-serif;    
     }
 `;
 
