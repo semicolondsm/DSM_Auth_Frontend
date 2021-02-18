@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 
 import axios from 'axios'
 
@@ -6,17 +6,21 @@ import { useCookies } from 'react-cookie'
 
 import { useHistory } from 'react-router-dom'
 
+import RegisterModal from './registerModal'
+
 import * as S from './styles'
 
 const MyPage = () => {
     const [infor, setInfor] = useState([])
     const [Acookie] = useCookies(['access-token'])
     const history = useHistory()
+    const [modal,modalOn] = useState(false);
     
-    useEffect(() => {
-        if(!Acookie['access-token']) {
+    // 마이페이지 토큰 없으면 접근 불가....
+     useEffect(() => { 
+/*         if(!Acookie['access-token']) {
             history.push('/')
-        }
+        } */
 
         axios({
             method: 'get',
@@ -34,25 +38,31 @@ const MyPage = () => {
         })
     }, [])
 
-    if(infor.length === 0) return <></>
+/*     if(infor.length === 0) return <></> */
+    const ModalOn = ()=>{
+        modalOn(!modal);
+    }
 
     return (
+        <>
+        <RegisterModal 
+            style={modal} 
+            setModalOn={ModalOn}
+        />
         <S.Wrapper>
-            <S.ContentWrapper>
-                {
-                    infor[0].name
-                }<br />
-                {
-                    infor[0].domain_url
-                }<br />
-                {
-                    infor[0].client_id
-                }<br />
-                {
-                    infor[0].client_secret
-                }
-            </S.ContentWrapper>
+            <S.MyContainer>
+                <S.UserName>김팔복<b>1320</b></S.UserName>
+                <S.UserEmail>jidole041214@naver.com</S.UserEmail>
+                <S.UserApp>
+                    내가 등록한 애플리케이션
+                    <S.AddApp
+                        onClick={ModalOn}
+                    >+</S.AddApp>
+                </S.UserApp>
+                <S.NoneApp>아직 등록된 애플리케이션이 없습니다!</S.NoneApp>
+            </S.MyContainer>
         </S.Wrapper>
+        </>
     )
 }
 
