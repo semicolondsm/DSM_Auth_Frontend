@@ -5,6 +5,8 @@ export const Wrapper = styled.div`
     height:100vh;
     min-height:500px;
     background:linear-gradient(#151717,black);
+    overflow-y:scroll;
+    min-width:1900px;
 `
 
 export const MyContainer = styled.div`
@@ -132,5 +134,34 @@ export const BtnCont = styled.div`
         background-color:white;
         cursor:pointer;
         outline:none;
+    }
+`
+
+export const Application = styled.div`
+    width:100%;
+    margin-top:3%;
+    padding:1% 3%;
+    background-color:rgb(50,50,50,0.5);
+    color:white;
+    font-size:3vmin;
+    border-radius:5px;
+    font-weight:bold;
+    font-family:나눔스퀘어;
+    p{
+        margin-top:1.5%;
+        margin-bottom:0;
+    }
+`
+
+export const AppDetail = styled.div`
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    font-size:1.8vmin;
+    color:#A4A4A4;
+    font-weight:500;
+    p{
+        margin-top:2%;
+        margin-bottom:2%;
     }
 `
