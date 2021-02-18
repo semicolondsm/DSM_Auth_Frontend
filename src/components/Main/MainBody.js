@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import * as S from "./styles";
 
-import Refractor from "react-refractor";
-
 import banner from "../../assets/banner.jpg";
 import icon from "../../assets/icon.svg";
+import arrow from "../../assets/right-arrow.svg";
+
 import axios from "axios";
 
 import {
@@ -158,16 +158,89 @@ const MainBody = () => {
           </S.ListWrapper>
         </S.ContentBox>
       </S.Section>
-      <S.Section bgColor="black" height="500px">
-        <S.ContentBox column>
-          <Refractor language="js" value={source} />
+      <S.Section bgColor="black" height="auto">
+        <S.ContentBox stair column>
+          <S.ContentTitle>Other Information</S.ContentTitle>
+          <S.SFlexBox bet>
+            <S.ProfileBox
+              onClick={() =>
+                (window.location.href = "https://semicolondsm.xyz")
+              }
+            >
+              <S.ProfileImg
+                size="auto 100%"
+                src="https://cdn.pixabay.com/photo/2017/02/26/00/36/borders-2099226_960_720.png"
+              />
+              <S.ProfileBottom>
+                <S.ProfileTitle>Semicolon; 대동여지도</S.ProfileTitle>
+                <S.ProfileSub href="https://semicolondsm.xyz">
+                  semicolon.xyz
+                </S.ProfileSub>
+                <S.Arrow>
+                  <img width="auto" height="40px" src={arrow} />
+                </S.Arrow>
+              </S.ProfileBottom>
+            </S.ProfileBox>
+            <S.ProfileBox
+              onClick={() =>
+                (window.location.href = "https://github.com/semicolonDSM")
+              }
+            >
+              <S.ProfileImg
+                size="90% auto"
+                src="https://cdn.pixabay.com/photo/2014/07/15/23/36/github-394322__340.png"
+              />
+              <S.ProfileBottom>
+                <S.ProfileTitle>Semicolon; Github</S.ProfileTitle>
+                <S.ProfileSub href="https://github.com/semicolonDSM">
+                  github.com/semicolonDSM
+                </S.ProfileSub>
+                <S.Arrow>
+                  <img width="auto" height="40px" src={arrow} />
+                </S.Arrow>
+              </S.ProfileBottom>
+            </S.ProfileBox>
+            <S.ProfileBox
+              onClick={() =>
+                (window.location.href = "https://ko.wikipedia.org/wiki/OAuth")
+              }
+            >
+              <S.ProfileImg
+                size="100% auto"
+                src="https://cdn.pixabay.com/photo/2015/10/31/11/59/information-1015298__340.jpg"
+              />
+              <S.ProfileBottom>
+                <S.ProfileTitle>OAuth란?</S.ProfileTitle>
+                <S.ProfileSub href="https://ko.wikipedia.org/wiki/OAuth">
+                  ko.wikipedia.org/wiki/OAuth
+                </S.ProfileSub>
+                <S.Arrow>
+                  <img width="auto" height="40px" src={arrow} />
+                </S.Arrow>
+              </S.ProfileBottom>
+            </S.ProfileBox>
+            <S.ProfileBox
+              onClick={() =>
+                (window.location.href =
+                  "https://ko.wikipedia.org/wiki/%EC%8C%8D%EB%B0%98%EC%A0%90")
+              }
+            >
+              <S.ProfileImg
+                size="auto 100%"
+                src="https://cdn.pixabay.com/photo/2015/11/06/12/51/news-1027337__340.jpg"
+              />
+              <S.ProfileBottom>
+                <S.ProfileTitle>Semicolon; 의 뜻</S.ProfileTitle>
+                <S.ProfileSub href="https://ko.wikipedia.org/wiki/%EC%8C%8D%EB%B0%98%EC%A0%90">
+                  ko.wikipedia.org/wiki/%EC%8C%8D%EB%B0%98%EC%A0%90
+                </S.ProfileSub>
+                <S.Arrow>
+                  <img width="auto" height="40px" src={arrow} />
+                </S.Arrow>
+              </S.ProfileBottom>
+            </S.ProfileBox>
+          </S.SFlexBox>
         </S.ContentBox>
-      </S.Section>
-      <S.Section bgColor="black" height="500px">
-        <S.ContentBox column></S.ContentBox>
-      </S.Section>
-      <S.Section bgColor="black" height="500px">
-        <S.ContentBox column></S.ContentBox>
       </S.Section>
     </S.BodyWrapper>
   );

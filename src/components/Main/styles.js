@@ -24,7 +24,7 @@ export const Section = styled.div`
       background-size: cover;
       background-position: center center;
     `}
-  padding-bottom: 50px;
+  padding-bottom: 100px;
 `;
 
 export const ContentBox = styled.div`
@@ -319,4 +319,86 @@ export const Item = styled.div`
   &:first-child {
     border-top: 1px solid rgb(190, 190, 190);
   }
+`;
+
+export const ProfileBottom = styled.div`
+  width: 100%;
+  height: 45%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+
+  &::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    right: 100%;
+    top: 0;
+    z-index: 1;
+    background: #333333;
+    transition: 0.2s all ease-out;
+  }
+`;
+
+export const Arrow = styled.div`
+  position: absolute;
+  bottom: 10px;
+  left: 13px;
+  z-index: 3;
+  opacity: 0;
+  transition: 0.2s opacity linear, 0.35s transform ease-out;
+`;
+
+export const ProfileBox = styled.div`
+  overflow: hidden;
+  width: 22.5%;
+  height: 400px;
+  background: #222222;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+
+  &:hover ${ProfileBottom}::before {
+    transform: translateX(100%);
+  }
+  &:hover ${Arrow} {
+    opacity: 1;
+    transform: translateX(15px);
+  }
+`;
+
+export const ProfileImg = styled.div`
+  height: 55%;
+  width: 100%;
+
+  background-image: url(${(props) => props.src || ""});
+  background-repeat: no-repeat;
+  background-size: ${(props) => props.size};
+  background-position: center;
+`;
+
+export const ProfileTitle = styled.h4`
+  margin: 0;
+  font-size: 20px;
+  color: white;
+  font-weight: 700;
+  text-align: left;
+  position: relative;
+  z-index: 2;
+`;
+
+export const ProfileSub = styled.a`
+  margin: 10px 0 0;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 700;
+  text-align: left;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
