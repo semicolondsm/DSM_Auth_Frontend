@@ -22,6 +22,19 @@ const GlobalStyled = createGlobalStyle`
         letter-spacing: -1.5px;
         font-family: 'Noto Sans KR', sans-serif;    
     }
+
+    .clicked {
+        transition: 0.2s all ease-out;
+        overflow-y: visible;
+    }
+
+    .clicked::after {
+        transform: translateY(-50%) rotate(-50deg);
+    }
+
+    .clicked::before {
+        transform: translateY(-50%) rotate(50deg);
+    }
 `;
 
 export default GlobalStyled;

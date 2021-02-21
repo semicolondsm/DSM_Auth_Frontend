@@ -11,7 +11,7 @@ import Menu from "./Menu";
 
 import axios from "axios";
 
-const Header = ({ login, LogOut, AToken }) => {
+const Header = ({ login, LogOut, AToken, switchPage }) => {
   const history = useHistory();
   const [log, setLog] = useState(false);
   const [name, setName] = useState("");
@@ -44,8 +44,15 @@ const Header = ({ login, LogOut, AToken }) => {
   }, [login]);
 
   useEffect(() => {
-    HeaderAnimation();
-  }, []);
+    if (window.location.pathname === "/") {
+      HeaderAnimation();
+      document.getElementById("header").style.height = "85px";
+    } else {
+      document.getElementById("header").style.background =
+        "rgba(26, 26, 28, 1)";
+      document.getElementById("header").style.height = "70px";
+    }
+  });
 
   return (
     <S.HeaderWrapper id="header">
@@ -58,7 +65,11 @@ const Header = ({ login, LogOut, AToken }) => {
         />
         <S.NaviWrapper>
           <S.NaviWrapper>
-            <S.LinkStyle to="/api" activeStyle={{ color: "#350871" }}>
+            <S.LinkStyle
+              to="/docs"
+              activeStyle={{ color: "#350871" }}
+              onClick={() => switchPage(null)}
+            >
               Open API
             </S.LinkStyle>
           </S.NaviWrapper>

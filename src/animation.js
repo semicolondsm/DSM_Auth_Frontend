@@ -18,10 +18,14 @@ export const Welcome = () => {
 };
 
 export const HeaderAnimation = () => {
+  const pathname = window.location.pathname;
   if (getScroll() >= 100) {
     document.getElementById("header").style.background = "rgba(26, 26, 28, 1)";
+  } else {
+    document.getElementById("header").style.background = "rgba(26, 26, 28, 0)";
   }
   window.addEventListener("scroll", () => {
+    if (pathname !== window.location.pathname) return;
     if (getScroll() >= 100) {
       document.getElementById("header").style.background =
         "rgba(26, 26, 28, 1)";
@@ -57,18 +61,20 @@ export const Show = (name) => {
 };
 
 export const SlideShow = () => {
+  const pathname = window.location.pathname;
   const self = [...document.getElementsByClassName("aM")];
   let isOn = false;
 
   window.addEventListener("scroll", () => {
-    if (getScroll() > getDivTop("slidePoint") + 400) {
+    if (pathname !== window.location.pathname) return;
+    if (getScroll() > getDivTop("slidePoint") + 500) {
       isOn = false;
       self.forEach((element, index) => {
         setTimeout(() => {
           if (isOn) return;
           element.style.transform = `translateX(${index * 85}px)`;
           element.style.opacity = 1;
-        }, 50 * index);
+        }, 80 * index);
       });
     } else {
       isOn = true;
@@ -81,12 +87,14 @@ export const SlideShow = () => {
 };
 
 export const Count = (max) => {
+  const pathname = window.location.pathname;
   const self = document.getElementById("count");
   let number = 0;
   let isPro = false;
   let timer;
 
   window.addEventListener("scroll", () => {
+    if (pathname !== window.location.pathname) return;
     if (getScroll() > getDivTop("count") + 400) {
       if (isPro) return;
       timer = setInterval(() => {
@@ -105,6 +113,7 @@ export const Count = (max) => {
 };
 
 export const AutoScroll = () => {
+  const pathname = window.location.pathname;
   const self = document.getElementById("scrollWrap");
   let isOn = false;
   let timer;
@@ -151,6 +160,7 @@ export const AutoScroll = () => {
   };
 
   window.addEventListener("scroll", () => {
+    if (pathname !== window.location.pathname) return;
     const sh = self.scrollHeight;
     const ch = self.clientHeight;
     if (getScroll() > getDivTop("scrollWrap") + 800) {
@@ -169,3 +179,12 @@ export const AutoScroll = () => {
     }
   });
 };
+
+function isInner(name) {
+  const self = document.getElementById(name);
+  if (document.documentElement.scrollTop >= self.getBoundingClientRect().top) {
+    return true;
+  } else {
+    return false;
+  }
+}

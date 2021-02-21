@@ -7,6 +7,8 @@ import arrow from "../../assets/right-arrow.svg";
 
 import axios from "axios";
 
+import { useHistory } from "react-router-dom";
+
 import {
   FirstAnimation,
   SlideShow,
@@ -21,8 +23,9 @@ const Me = [
   "아니 귀찮다고",
 ];
 
-const MainBody = () => {
+const MainBody = (props) => {
   const [list, setList] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     FirstAnimation();
@@ -59,10 +62,16 @@ const MainBody = () => {
             <br />
             제공하고 있습니다. 지금 바로 사용해보세요 !
             <S.ButtonBox>
-              <S.SButton color="white" bgColor="#132FB8">
+              <S.SButton
+                onClick={() => props.switchPage(null)}
+                color="white"
+                bgColor="#132FB8"
+              >
                 Open API
               </S.SButton>
-              <S.SButton>로그인</S.SButton>
+              <S.SButton onClick={() => history.push("/login")}>
+                로그인
+              </S.SButton>
             </S.ButtonBox>
           </S.H1Box>
         </S.ContentBox>
@@ -79,8 +88,17 @@ const MainBody = () => {
                 </S.ApiDes>
               </S.ApiTitle>
               <div>
-                <S.ApiButton>시작하기</S.ApiButton>
-                <S.ApiButton>문서보기</S.ApiButton>
+                <S.ApiButton
+                  onClick={() =>
+                    (window.location.href =
+                      "https://bintray.com/jaewonkim1468/dsm-sdk-v1/dsmauth")
+                  }
+                >
+                  시작하기
+                </S.ApiButton>
+                <S.ApiButton onClick={() => props.switchPage("android")}>
+                  문서보기
+                </S.ApiButton>
               </div>
             </S.ApiBox>
             <S.ApiBox>
@@ -91,8 +109,16 @@ const MainBody = () => {
                 </S.ApiDes>
               </S.ApiTitle>
               <div>
-                <S.ApiButton>시작하기</S.ApiButton>
-                <S.ApiButton>문서보기</S.ApiButton>
+                <S.ApiButton
+                  onClick={() =>
+                    (window.location.href = "https://cocoapods.org/pods/DSMSDK")
+                  }
+                >
+                  시작하기
+                </S.ApiButton>
+                <S.ApiButton onClick={() => props.switchPage("ios")}>
+                  문서보기
+                </S.ApiButton>
               </div>
             </S.ApiBox>
             <S.ApiBox>
@@ -104,7 +130,9 @@ const MainBody = () => {
               </S.ApiTitle>
               <div>
                 <S.ApiButton>시작하기</S.ApiButton>
-                <S.ApiButton>문서보기</S.ApiButton>
+                <S.ApiButton onClick={() => props.switchPage("api")}>
+                  문서보기
+                </S.ApiButton>
               </div>
             </S.ApiBox>
             <S.ApiBox>
@@ -112,7 +140,9 @@ const MainBody = () => {
                 시작하기
                 <S.ApiDes>모든 문서를 한눈에 보고 쉽게 사용해보세요.</S.ApiDes>
               </S.ApiTitle>
-              <S.ApiButton only>문서보기</S.ApiButton>
+              <S.ApiButton onClick={() => props.switchPage("start")} only>
+                문서보기
+              </S.ApiButton>
             </S.ApiBox>
           </S.ApiBoxWrapper>
         </S.ContentBox>

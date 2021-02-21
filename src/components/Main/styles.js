@@ -295,6 +295,7 @@ export const ListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-self: center;
+  scroll-behavior: unset;
   &::-webkit-scrollbar {
     background: none;
     width: 10px;
