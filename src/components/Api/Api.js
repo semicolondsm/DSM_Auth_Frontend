@@ -155,7 +155,11 @@ const Api = (props) => {
     function callback() {
       if (window.location.pathname.slice(1, 5) != "docs") return;
       window.addEventListener("scroll", () => {
-        if (window.location.pathname.slice(1, 5) != "docs") return;
+        if (
+          window.location.pathname.slice(1, 5) != "docs" ||
+          isNaN(window.location.href.slice(-1))
+        )
+          return;
         [...document.getElementsByClassName("docsWrap")[0].children].forEach(
           (element, index) => {
             const elementOffset = element.getBoundingClientRect().top - 125;
