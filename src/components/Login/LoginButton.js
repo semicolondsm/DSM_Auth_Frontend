@@ -1,12 +1,10 @@
-import React, { useEffect, useRef } from "react";
-
 import * as S from "./styles";
 
 const LoginButton = (props) => {
   return (
     <S.Button id="circleButton" onClick={props.onSubmit}>
       <S.Circle id="circle" />
-      <S.ButtonP>로그인</S.ButtonP>
+      <S.ButtonP>LOGIN</S.ButtonP>
     </S.Button>
   );
 };

@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 export const Section = styled.div`
   background: ${(props) => props.bgColor || "white"};
@@ -19,6 +19,7 @@ export const Section = styled.div`
   flex-direction: column;
   color: white;
   font-size: 23px;
+  background: linear-gradient(#181a1a, black);
   ${(props) =>
     props.nono &&
     css`
@@ -28,7 +29,7 @@ export const Section = styled.div`
 
 export const InputWrapper = styled.div`
   border-radius: 2px;
-  background: white;
+  background: #ebebeb;
   width: 350px;
   height: 45px;
   padding: 3px 5px;
@@ -44,18 +45,21 @@ export const InputWrapper = styled.div`
 export const Inter = styled.p`
   position: absolute;
   top: 0;
-  left: 10px;
+  left: 15px;
   transition: all 0.25s;
   transform: translateY(-30%);
   font-size: 17px;
-  color: black;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 700;
+  color: #4a4a4a;
 
   @media only screen and (max-width: 768px) {
     font-size: 15px;
     top: 10%;
 
     ${(props) =>
-      props.on === true && css`
+      props.on === true &&
+      css`
         top: -50%;
         transform: translateY(-100%);
         left: 12px;
@@ -65,7 +69,8 @@ export const Inter = styled.p`
   }
 
   ${(props) =>
-    props.on === true && css`
+    props.on === true &&
+    css`
       top: -50%;
       transform: translateY(-100%);
       left: 12px;
@@ -82,6 +87,8 @@ export const Input = styled.input`
   outline: none;
   color: black;
   letter-spacing: 1px;
+  background: #ebebeb;
+  padding: 0 5%;
 
   &:focus {
     & + ${Inter} {
@@ -95,20 +102,22 @@ export const Input = styled.input`
 `;
 
 export const Img = styled.img`
-  margin-bottom: 55px;
+  margin-bottom: 20px;
   cursor: pointer;
 
   @media only screen and (max-width: 768px) {
     width: 200px;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
   }
 `;
 
 export const ButtonP = styled.p`
-  font-size: 26px;
+  font-size: 2.1vmin;
   color: white;
   text-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
   transition: all 0.25s;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: bold;
 
   @media only screen and (max-width: 768px) {
     font-size: 18px;
@@ -118,7 +127,7 @@ export const ButtonP = styled.p`
 export const Button = styled.button`
   margin-top: 30px;
   width: 350px;
-  height: 60px;
+  height: 50px;
   outline: none;
   cursor: pointer;
   background: #713eff;
@@ -127,6 +136,7 @@ export const Button = styled.button`
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  border-radius: 3px;
 
   transition: all 0.25s;
 
@@ -165,12 +175,14 @@ export const Circle = styled.div`
 `;
 
 export const Agree = styled.p`
+  width: 88%;
   font-size: 14px;
-  margin: 10px 0 -5px;
-  color: white;
+  margin: 0px 0 -10px;
+  color: #b8b8b8;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  letter-spacing: -2px;
 
   @media only screen and (max-width: 768px) {
     transform: scale(0.9);
@@ -180,16 +192,15 @@ export const Agree = styled.p`
 export const Label = styled.label`
   width: 18px;
   height: 18px;
-  background: white;
+  background: #e2e2e2;
   margin: 5px 5px 5px 10px;
-  border-radius: 3px;
 
   position: relative;
   cursor: pointer;
 
   &::after {
     content: "";
-    width: 15px;
+    width: 13px;
     height: 1.5px;
     background: red;
     position: absolute;
@@ -202,7 +213,7 @@ export const Label = styled.label`
 
   &::before {
     content: "";
-    width: 15px;
+    width: 13px;
     height: 1.5px;
     background: red;
     position: absolute;
@@ -222,12 +233,12 @@ export const CheckBox = styled.input`
     & + ${Label}::after {
       background: green;
       width: 8px;
-      transform: rotate(45deg) translate(-70%, 120%);
+      transform: rotate(40deg) translate(-75%, 130%);
     }
     & + ${Label}::before {
       background: green;
-      width: 11px;
-      transform: rotate(-45deg) translate(-30%, 50%);
+      width: 10px;
+      transform: rotate(-43deg) translate(-28%, 80%);
     }
   }
 `;
@@ -306,7 +317,17 @@ export const CA = styled.a`
 `;
 
 export const LinkA = styled(Link)`
-  font-size: 15px;
-  margin-top: 20px;
+  font-size: 1.3vmin;
+  margin-top: 50px;
   color: rgb(200, 200, 200);
-`
+`;
+
+export const SignIn = styled.div`
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-size: 4vmin;
+  font-weight: bold;
+  font-family: 나눔스퀘어;
+  margin-bottom: 30px;
+`;
