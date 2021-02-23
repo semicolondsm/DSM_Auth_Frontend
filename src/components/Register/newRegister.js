@@ -238,7 +238,7 @@ const NewRegister = React.memo(() => {
           ></s.Input>
         </s.InputWrapper>
         <s.BtnWrapper>
-          <s.Btn onClick={() => history.push("/")}>취소</s.Btn>
+          <s.Btn onClick={() => history.goBack()}>취소</s.Btn>
           <s.Btn onClick={register}>확인</s.Btn>
         </s.BtnWrapper>
       </s.Container>

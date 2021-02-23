@@ -4,7 +4,7 @@ import * as S from "./styles";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-import { useCookies } from  'react-cookie'
+import { useCookies } from "react-cookie";
 
 import queryString from "query-string";
 
@@ -18,30 +18,32 @@ const Login = (props) => {
   const [password, setPass] = useState("");
   const check = useRef();
   const history = useHistory();
-  const [Rcookie, Rset, Rremove] = useCookies(['refresh-token'])
-  const [Acookie, Aset, Aremove] = useCookies(['access-token'])
+  const [Rcookie] = useCookies(["refresh-token"]);
+  const [Acookie, Aset] = useCookies(["access-token"]);
 
   useEffect(() => {
-    history.replace("login?redirect_url=http://localhost:3000&client_id=123456")
-    if(Rcookie['refresh-token'] !== undefined) {
+    history.replace(
+      "login?redirect_url=http://localhost:3000&client_id=123456"
+    );
+    if (Rcookie["refresh-token"] !== undefined) {
       axios({
-        method: 'get',
-        url: '/dsmauth/refresh',
+        method: "get",
+        url: "/dsmauth/refresh",
         headers: {
-          'refresh-token': `Bearer ${Rcookie['refresh-token']}`
-        }
+          "refresh-token": `Bearer ${Rcookie["refresh-token"]}`,
+        },
       })
-      .then(res => {
-        console.log(res)
-
-        Aset('access-token', res.data['access-token'], {expires: new Date(Date.now() + 1000 * 60 * 60 * 2)})
-        history.push('/')
-      })
-      .catch(err => {
-        console.log(err.response)
-      })
+        .then((res) => {
+          Aset("access-token", res.data["access-token"], {
+            expires: new Date(Date.now() + 1000 * 60 * 60 * 2),
+          });
+          history.push("/");
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
     }
-  }, [])
+  }, []);
 
   const login = (e) => {
     e.preventDefault();
@@ -62,13 +64,6 @@ const Login = (props) => {
       alert("아이디나 비밀번호를 입력하세요.");
       return;
     }
-    
-    console.log({
-      id,
-      password,
-      redirect_url,
-      client_id,
-    })
     axios({
       url: "/dsmauth/login",
       method: "post",
@@ -83,18 +78,18 @@ const Login = (props) => {
         window.location.href = res.data.location;
       })
       .catch((err) => {
-        switch(err.response.status) {
+        switch (err.response.status) {
           case 401:
             alert("아이디나 비밀번호가 틀렸습니다.");
             break;
           default:
-            alert("에러가 났습니다 !")
+            alert("에러가 났습니다 !");
             break;
         }
       });
   };
 
-  //if(Object.keys(query).length === 0) return <>Error</>;
+  if (Object.keys(query).length === 0) return <>Error</>;
 
   return (
     <S.Section bgColor="black">
@@ -118,9 +113,7 @@ const Login = (props) => {
           <S.Input
             value={id}
             type="text"
-            onChange={(e) => 
-              setId(e.target.value)
-            }
+            onChange={(e) => setId(e.target.value)}
           />
           <S.Inter id="id1" on={id != "" ? true : false}>
             ID

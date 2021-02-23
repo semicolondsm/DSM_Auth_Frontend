@@ -33,7 +33,7 @@ export const InputWrapper = styled.div`
   width: 350px;
   height: 45px;
   padding: 3px 5px;
-  margin: 16px 30px;
+  margin: 16px 35px 20px;
   position: relative;
 
   @media only screen and (max-width: 768px) {
@@ -85,19 +85,18 @@ export const Input = styled.input`
   font-size: 18px;
   border: none;
   outline: none;
-  color: black;
-  letter-spacing: 1px;
+  color: #111111;
+  letter-spacing: 0;
   background: #ebebeb;
-  padding: 0 5%;
+  padding: 0 2%;
+  font-family: "Noto Sans KR", sans-serif;
 
-  &:focus {
-    & + ${Inter} {
-      top: -50%;
-      transform: translateY(-100%);
-      left: 12px;
-      font-size: 16px;
-      color: white;
-    }
+  &:focus + ${Inter} {
+    top: -50%;
+    transform: translateY(-100%);
+    left: 12px;
+    font-size: 16px;
+    color: white;
   }
 `;
 
@@ -317,8 +316,8 @@ export const CA = styled.a`
 `;
 
 export const LinkA = styled(Link)`
-  font-size: 1.3vmin;
-  margin-top: 50px;
+  font-size: 1.5vmin;
+  margin-top: 30px;
   color: rgb(200, 200, 200);
 `;
 
