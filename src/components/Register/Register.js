@@ -43,12 +43,12 @@ const Register = React.memo(() => {
     })
       .then((res) => {
         console.log(res);
-        alert("회원가입 성공 !")
-        history.push('/')
+        alert("회원가입 성공 !");
+        history.push("/");
       })
       .catch((err) => {
         console.log(err.response);
-        alert("회원가입 실패 !")
+        alert("회원가입 실패 !");
       });
   };
 
@@ -82,6 +82,9 @@ const Register = React.memo(() => {
         setState([true, false, false]);
       })
       .catch((err) => {
+        if (err.response.status === 403) {
+          alert("이미 회원가입 된 이메일 입니다.");
+        }
         console.log(err.response);
       });
   };

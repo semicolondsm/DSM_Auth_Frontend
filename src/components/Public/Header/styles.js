@@ -3,16 +3,14 @@ import { Link } from "react-router-dom";
 
 export const HeaderWrapper = styled.div`
   width: 100%;
-  height: 65px;
-  padding: 5px 150px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  height: 85px;
   position: fixed;
+  padding: 17px 0;
   top: 0;
   left: 0;
   background: rgba(26, 26, 28, 0);
   z-index: 10000;
+  transition: 0.1s background linear;
 
   @media screen and (max-width: 768px) {
     height: 50px;
@@ -22,6 +20,16 @@ export const HeaderWrapper = styled.div`
   @media screen and (max-width: 424px) {
     padding: 7px 20px;
   }
+`;
+
+export const HeaderContent = styled.div`
+  max-width: 1600px;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const LogoImg = styled.img`
@@ -53,9 +61,13 @@ margin-left: 15px;
 }
 `;
 
-export const LinkStyle = styled(Link)`${LStyle}`
+export const LinkStyle = styled(Link)`
+  ${LStyle}
+`;
 
-export const LinkStyleButton = styled.button`${LStyle}`
+export const LinkStyleButton = styled.button`
+  ${LStyle}
+`;
 
 export const MenuWrapper = styled.div`
   position: relative;
@@ -65,8 +77,7 @@ export const MenuWrapper = styled.div`
   justify-content: center;
   margin-left: 10px;
   cursor: pointer;
-
-`
+`;
 
 export const Menu = styled.div`
   position: absolute;
@@ -80,4 +91,4 @@ export const Menu = styled.div`
   box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3);
   color: white;
   flex-direction: column;
-`
+`;
