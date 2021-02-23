@@ -103,7 +103,7 @@ const Login = (props) => {
           props.my === true && history.push("/");
         }}
         src={logo}
-        width="300"
+        width="200"
       />
       <form
         style={{
@@ -137,13 +137,13 @@ const Login = (props) => {
           </S.Inter>
         </S.InputWrapper>
         <S.Agree>
-          당신의 정보를 서비스에서 이용하는걸 동의하십니까 ?
+          개인정보 수집 이용 동의
           <S.CheckBox id="asd" type="checkbox" ref={check} />
           <S.Label htmlFor="asd" />
         </S.Agree>
         <LoginButton onSubmit={login} />
       </form>
-      <S.LinkA to="/register">아이디가 없으신가요 ?</S.LinkA>
+      <S.LinkA to="/register">계정이 없으신가요?</S.LinkA>
     </S.Section>
   );
 };
