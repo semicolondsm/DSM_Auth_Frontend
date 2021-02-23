@@ -8,14 +8,13 @@ import { useHistory } from "react-router-dom";
 
 import RegisterModal from "./registerModal";
 
-import Header from "../Public/Header/Header";
-
 import * as S from "./styles";
 
-const MyPage = () => {
-  const [infor, setInfor] = useState([]);
+const MyPage = (props) => {
   const [Acookie] = useCookies(["access-token"]);
   const history = useHistory();
+  const [infor, setInfor] = useState([]);
+  const [myinfor, setMyinfor] = useState({});
   const [modal, modalOn] = useState(false);
 
   // 마이페이지 토큰 없으면 접근 불가....
@@ -23,6 +22,21 @@ const MyPage = () => {
     if (!Acookie["access-token"]) {
       history.push("/");
     }
+
+    axios({
+      method: "get",
+      url: "http://54.180.98.91:8090/v1/info/basic",
+      headers: {
+        "access-token": `Bearer ${props.AToken}`,
+      },
+    })
+      .then((res) => {
+        setMyinfor(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
 
     axios({
       method: "get",
@@ -47,13 +61,13 @@ const MyPage = () => {
   return (
     <>
       <RegisterModal style={modal} setModalOn={ModalOn} />
-      <Header />
       <S.Wrapper>
         <S.MyContainer>
           <S.UserName>
-            김팔복<b>1320</b>
+            {myinfor.name}
+            <b>{myinfor.gcn}</b>
           </S.UserName>
-          <S.UserEmail>jidole041214@naver.com</S.UserEmail>
+          <S.UserEmail>{myinfor.email}</S.UserEmail>
           <S.UserApp>
             내가 등록한 애플리케이션
             <S.AddApp onClick={ModalOn}>+</S.AddApp>

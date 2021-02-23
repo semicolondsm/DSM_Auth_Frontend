@@ -171,7 +171,7 @@ export const DocsDes = styled.p`
 export const DocsSubTitle = styled.h2`
   font-size: 24px;
   font-weight: 500;
-  white-space: pre-line;
+  white-space: pre;
   color: #111111;
   margin-bottom: 20px;
 `;
@@ -188,4 +188,10 @@ export const DocsCode = styled.p`
   white-space: pre-wrap;
   padding: 20px 30px;
   letter-spacing: 0;
+  margin-bottom: 10px;
+`;
+
+export const DocsImg = styled.img`
+  width: 100%;
+  height: auto;
 `;

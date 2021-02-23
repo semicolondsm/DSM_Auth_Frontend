@@ -4,6 +4,11 @@ import { Route, useHistory } from "react-router-dom";
 
 import * as S from "./styles";
 
+import des1 from "../../assets/des1.PNG";
+import des2 from "../../assets/des2.PNG";
+import des3 from "../../assets/des3.PNG";
+import des4 from "../../assets/des4.PNG";
+
 const androidcode = `val instance=DsmSdk.instance
 
 instance.initSDK("<$client_id>","<$client_secret>","<$redirect_url>")`;
@@ -89,6 +94,75 @@ const swiftcode4 = `DSMAUTH.me(access_token: 〈ACCESS_TOKEN〉){ (user, error) 
     _ = user!.StudentID
     _ = user!.email
 	}
+}`;
+
+const api1 = `Body
+{
+    client_id: <client_id>,
+    client_secret: <client_secret>,
+    code: <code>
+}
+`;
+const api2 = `Status code 200 OK
+{
+    access-token: <access_token>,
+    refresh-token: <refresh_token>
+}
+`;
+const api3 = `Status code 400 Bad Request
+{
+    code: 400,
+    message: "Bad Request"
+}
+`;
+const api4 = `Status code 401 Unauthorized
+{
+    code: 401,
+    message: "Unauthorized Secret Key"
+}
+`;
+const api5 = `Status code 403 Forbidden
+{
+    code: 403
+    message: "Forbidden code"
+}
+`;
+const api6 = `Header
+{
+    refresh-token: Bearer <refresh_token>
+}
+`;
+const api7 = `Status code 200 OK
+{
+    access-token: <access_token>
+}
+`;
+const api8 = `Status code 401 Unauthorized
+{
+    code: 419,
+    message: "Expired token"
+}
+`;
+const api9 = `Status code 403 Forbidden
+{
+    code: 403,
+    message: "Forbidden Consumer"
+}
+`;
+const api10 = `Header
+{
+    access-token: Bearer <access_token>
+}`;
+const api11 = `Status 200 OK
+{
+    name: "OOO",
+    gcn: "9999",
+    email: "209999xxx@dsm.hs.kr"
+}`;
+const api12 = `Status code 401 Unauthorized
+{
+    code: 401,
+    message: "Unauthorized token"
 }`;
 
 const Api = (props) => {
@@ -293,8 +367,8 @@ const Api = (props) => {
         <S.SideItem>
           <S.SideTitle className="titles">Api Docs</S.SideTitle>
           <S.SideSubWrapper className="itemWrap">
-            <S.SideSub>시작하기</S.SideSub>
-            <S.SideSub>로그인</S.SideSub>
+            <S.SideSub>소개</S.SideSub>
+            <S.SideSub>토큰 발급</S.SideSub>
             <S.SideSub>토큰 재발급</S.SideSub>
             <S.SideSub>정보 받아오기</S.SideSub>
             <S.SideLine className="no">
@@ -308,13 +382,76 @@ const Api = (props) => {
           <Route path="/docs/1">
             <S.DocsWrapper className="docsWrap">
               <S.DocsSection>
-                <S.DocsTitle>시작하기</S.DocsTitle>
+                <S.DocsTitle>소개</S.DocsTitle>
+                <S.DocsDes>
+                  우리 DSM Auth는 동아리별 여러 프로젝트에서 편하게 로그인을
+                  구현할 수 있고, <br />
+                  사용자들이 새로 계정을 만들 필요가 없어 접근성을 더욱 쉽게
+                  만들어줄 수 있는 서비스 입니다. <br />
+                  <br />
+                  <S.DocsSubTitle>Made By Semicolon</S.DocsSubTitle>
+                  <br />
+                  Front-end
+                  <br />- 안은결
+                  <br />- 정지원
+                  <br />- 성예인
+                  <br />
+                  <br />
+                  Back-end
+                  <br />- 정지우
+                  <br />- 조호원
+                  <br />- 손채건
+                  <br />- 이서준
+                  <br />
+                  <br />
+                  Android
+                  <br />- 김재원
+                  <br />- 최민준
+                  <br />
+                  <br />
+                  iOS
+                  <br />- 김수완
+                  <br />
+                  <br />
+                  Design
+                  <br />- 이재원
+                </S.DocsDes>
+                <S.DocsSubTitle>주의사항</S.DocsSubTitle>
+                <S.DocsDes>
+                  OAuth에 대한 배경지식을 쌓으면 이해가 쉽습니다. -{" "}
+                  <S.DocsA href="https://ko.wikipedia.org/wiki/OAuth">
+                    OAuth 위키백과
+                  </S.DocsA>
+                </S.DocsDes>
               </S.DocsSection>
               <S.DocsSection>
                 <S.DocsTitle>로그인하기</S.DocsTitle>
+                이용약관을 체크하신 후 로그인을 합니다.
+                <br />
+                계정이 없다면 ? -{" "}
+                <S.DocsA href="" onClick={() => history.push("/register")}>
+                  회원가입 하러가기
+                </S.DocsA>
               </S.DocsSection>
               <S.DocsSection>
                 <S.DocsTitle>어플리케이션 등록하기</S.DocsTitle>
+                <S.DocsDes>
+                  오른쪽 상단 내 이름을 클릭후 내 정보로 들어갑니다.
+                </S.DocsDes>
+                <S.DocsImg src={des1} />
+                <br />
+                <S.DocsImg src={des2} />
+                <S.DocsDes>내 어플리케이션 옆 + 버튼을 클릭해줍니다.</S.DocsDes>
+                <S.DocsImg src={des3} />
+                <S.DocsDes>
+                  제시된 칸을 모두 채운 후 등록 버튼을 클릭합니다.
+                </S.DocsDes>
+                <S.DocsImg src={des4} />
+                <S.DocsDes>
+                  1) 등록할 서비스의 이름 <br />
+                  2) 등록할 서비스의 도메인 <br />
+                  3) DSM Auth 로그인 후 리다이렉트 될 URL
+                </S.DocsDes>
               </S.DocsSection>
             </S.DocsWrapper>
           </Route>
@@ -539,20 +676,47 @@ const Api = (props) => {
           <Route path="/docs/4">
             <S.DocsWrapper className="docsWrap">
               <S.DocsSection>
-                <S.DocsTitle>시작하기</S.DocsTitle>
-                <S.DocsBody></S.DocsBody>
+                <S.DocsTitle>소개</S.DocsTitle>
+                <S.DocsDes>
+                  이 문서는 DSM Auth Open API에 관한 문서입니다.
+                  <br />
+                  <br />
+                  Base URL: http://54.180.98.91:8090/
+                </S.DocsDes>
               </S.DocsSection>
               <S.DocsSection>
-                <S.DocsTitle>로그인</S.DocsTitle>
-                <S.DocsBody></S.DocsBody>
+                <S.DocsTitle>토큰 발급</S.DocsTitle>
+                <S.DocsSubTitle>/dsmauth/token/ {"    "}POST</S.DocsSubTitle>
+                <S.DocsSubTitle>Request</S.DocsSubTitle>
+                <S.DocsCode>{api1}</S.DocsCode>
+                <S.DocsSubTitle>Response</S.DocsSubTitle>
+                <S.DocsCode>{api2}</S.DocsCode>
+                <S.DocsCode>{api3}</S.DocsCode>
+                <S.DocsCode>{api4}</S.DocsCode>
+                <S.DocsCode>{api5}</S.DocsCode>
               </S.DocsSection>
               <S.DocsSection>
                 <S.DocsTitle>토큰 재발급</S.DocsTitle>
-                <S.DocsBody></S.DocsBody>
+                <S.DocsSubTitle>/dsmauth/refresh/ {"    "}GET</S.DocsSubTitle>
+                <S.DocsSubTitle>Request</S.DocsSubTitle>
+                <S.DocsCode>{api6}</S.DocsCode>
+                <S.DocsSubTitle>Response</S.DocsSubTitle>
+                <S.DocsCode>{api7}</S.DocsCode>
+                <S.DocsCode>{api3}</S.DocsCode>
+                <S.DocsCode>{api12}</S.DocsCode>
+                <S.DocsCode>{api8}</S.DocsCode>
+                <S.DocsCode>{api9}</S.DocsCode>
               </S.DocsSection>
               <S.DocsSection>
                 <S.DocsTitle>정보 받아오기</S.DocsTitle>
-                <S.DocsBody></S.DocsBody>
+                <S.DocsSubTitle>/v1/info/basic/ {"    "}GET</S.DocsSubTitle>
+                <S.DocsSubTitle>Request</S.DocsSubTitle>
+                <S.DocsCode>{api10}</S.DocsCode>
+                <S.DocsSubTitle>Response</S.DocsSubTitle>
+                <S.DocsCode>{api11}</S.DocsCode>
+                <S.DocsCode>{api3}</S.DocsCode>
+                <S.DocsCode>{api12}</S.DocsCode>
+                <S.DocsCode>{api8}</S.DocsCode>
               </S.DocsSection>
             </S.DocsWrapper>
           </Route>

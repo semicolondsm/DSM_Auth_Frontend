@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Api from "../Api/Api";
 import MainBody from "./MainBody";
+import Mypage from "../myPage/myPage";
 
 import * as S from "./styles";
 
@@ -116,6 +117,10 @@ const Main = (props) => {
             render={() => <MainBody switchPage={switchPage} />}
           />
           <Route path="/docs" render={() => <Api number={number} />} />
+          <Route
+            path="/mypage"
+            render={() => <Mypage AToken={Acookie["access-token"]} />}
+          />
         </Switch>
       </S.Wrapper>
     </>
