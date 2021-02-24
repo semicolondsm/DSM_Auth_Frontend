@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import GlobalStyled from "./GlobalStyled";
 
-import { Main, Login, LoginClient, Consumer } from "./components";
+import { Main, Login, LoginClient } from "./components";
 import newRegister from "./components/Register/newRegister";
 
 function App() {
@@ -22,7 +22,6 @@ function App() {
         />
         <Route path="/external/login" component={LoginClient} />
         <Route path="/register" component={newRegister} />
-        <Route path="/consumer" component={Consumer} />
         <Route path="/" component={Main} />
       </Switch>
     </BrowserRouter>
