@@ -25,7 +25,7 @@ const MyPage = (props) => {
 
     axios({
       method: "get",
-      url: "http://54.180.98.91:8090/v1/info/basic",
+      url: "/v1/info/basic",
       headers: {
         "access-token": `Bearer ${props.AToken}`,
       },
@@ -77,9 +77,23 @@ const MyPage = (props) => {
           )}
 
           {infor.map(
-            ({ name, domain_url, redirect_url, client_secret }, index) => (
+            (
+              { name, domain_url, redirect_url, client_secret, client_id },
+              index
+            ) => (
               <S.Application key={index}>
-                <p>{name}</p>
+                <p
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "flex-end",
+                  }}
+                >
+                  {name}
+                  <span style={{ fontSize: "16px" }}>
+                    클라이언트 아이디: {client_id}
+                  </span>
+                </p>
                 <S.AppDetail>
                   <p>도메인 : {domain_url}</p>
                   <p>리다이렉트 도메인 : {redirect_url}</p>

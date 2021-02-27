@@ -23,7 +23,7 @@ const Header = ({ login, LogOut, AToken, switchPage }) => {
       if (sessionStorage.getItem("name") == undefined) {
         axios({
           method: "get",
-          url: "http://54.180.98.91:8090/v1/info/basic",
+          url: "/v1/info/basic",
           headers: {
             "access-token": `Bearer ${AToken}`,
           },

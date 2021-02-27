@@ -43,8 +43,8 @@ const Main = (props) => {
         url: "/dsmauth/token",
         data: {
           code: query.code,
-          client_id: "123456",
-          client_secret: "1234",
+          client_id: "e6c15ee16718494f89de21eb19b4aae9",
+          client_secret: "3fde1f3dd29f4d3aa81f423c7731b4a9",
         },
       })
         .then((res) => {

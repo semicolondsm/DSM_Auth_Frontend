@@ -23,7 +23,7 @@ const Login = (props) => {
 
   useEffect(() => {
     history.replace(
-      "login?redirect_url=http://localhost:3000&client_id=123456"
+      "login?redirect_url=https://developer.dsmkr.com&client_id=e6c15ee16718494f89de21eb19b4aae9"
     );
     if (Rcookie["refresh-token"] !== undefined) {
       axios({
