@@ -24,6 +24,7 @@ export const Section = styled.div`
     props.nono &&
     css`
       justify-content: flex-start;
+      background: white !important;
     `}
 `;
 
