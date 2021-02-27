@@ -29,11 +29,11 @@ const GlobalStyled = createGlobalStyle`
     }
 
     .clicked::after {
-        transform: translateY(-50%) rotate(-50deg);
+        transform: translateY(-50%) rotate(-50deg) !important;
     }
 
     .clicked::before {
-        transform: translateY(-50%) rotate(50deg);
+        transform: translateY(-50%) rotate(50deg) !important;
     }
 `;
 
