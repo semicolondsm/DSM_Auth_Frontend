@@ -32,6 +32,7 @@ const MyPage = (props) => {
     })
       .then((res) => {
         setMyinfor(res.data);
+      })
       .catch((err) => {
         console.log(err);
       });
