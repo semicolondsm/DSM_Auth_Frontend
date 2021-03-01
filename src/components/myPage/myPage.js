@@ -32,10 +32,8 @@ const MyPage = (props) => {
     })
       .then((res) => {
         setMyinfor(res.data);
-        console.log(res.data);
-      })
       .catch((err) => {
-        console.log(err.response);
+        console.log(err);
       });
 
     axios({
@@ -46,11 +44,10 @@ const MyPage = (props) => {
       },
     })
       .then((res) => {
-        console.log(res);
         setInfor(res.data);
       })
       .catch((err) => {
-        console.log(err.response);
+        console.log(err);
       });
   }, []);
 

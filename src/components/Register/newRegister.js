@@ -101,12 +101,11 @@ const NewRegister = React.memo(() => {
         },
       })
         .then((res) => {
-          console.log(res);
           alert("회원가입 성공 !");
           history.push("/");
         })
         .catch((err) => {
-          console.log(err.response);
+          console.log(err);
           alert("회원가입 실패 !");
         });
     } else {
@@ -132,13 +131,12 @@ const NewRegister = React.memo(() => {
       },
     })
       .then((res) => {
-        console.log(res);
         // 3분 제한 시작
         setCodeStart(true);
         setCount(300);
       })
       .catch((err) => {
-        console.log(err.response);
+        console.log(err);
         alert("인증코드 발송에 실패했습니다. 이메일을 확인하세요.");
       });
   };
@@ -153,7 +151,6 @@ const NewRegister = React.memo(() => {
       },
     })
       .then((res) => {
-        console.log(res);
         alert("아이디가 사용 가능합니다 !");
         setState({
           ...state,
@@ -161,7 +158,7 @@ const NewRegister = React.memo(() => {
         });
       })
       .catch((err) => {
-        console.log(err.response);
+        console.log(err);
         alert("아이디가 중복됩니다 !");
       });
   };

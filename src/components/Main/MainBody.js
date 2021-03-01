@@ -41,7 +41,7 @@ const MainBody = (props) => {
         setList(res.data);
       })
       .catch((err) => {
-        console.log(err.response);
+        console.log(err);
       });
   }, []);
 

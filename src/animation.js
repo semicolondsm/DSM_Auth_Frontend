@@ -152,7 +152,6 @@ export const AutoScroll = () => {
       }
       const easeNum = easeOutSine(count / sh) * sh;
       const plus = easeNum - prevNum;
-      console.log(plus);
       self.scrollTop -= plus;
       count += 1;
       prevNum = easeNum;

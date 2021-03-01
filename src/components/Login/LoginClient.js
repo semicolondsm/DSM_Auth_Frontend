@@ -46,7 +46,6 @@ const LoginClient = (props) => {
       },
     })
       .then((res) => {
-        console.log(res.data);
         window.location.href = res.data.location;
       })
       .catch((err) => {

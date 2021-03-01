@@ -58,7 +58,7 @@ const Main = (props) => {
           setLogin(true);
         })
         .catch((err) => {
-          console.log(err.response);
+          console.log(err;
         });
     } else if (Acookie["access-token"] !== undefined) {
       setLogin(true);

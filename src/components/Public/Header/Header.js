@@ -29,11 +29,10 @@ const Header = ({ login, LogOut, AToken, switchPage }) => {
           },
         })
           .then((res) => {
-            console.log(res);
             setName(res.data.name);
           })
           .catch((err) => {
-            console.log(err.response);
+            console.log(err);
           });
       } else {
         setName(sessionStorage.getItem("name"));
