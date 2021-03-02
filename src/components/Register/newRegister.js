@@ -12,7 +12,6 @@ import { useHistory } from "react-router-dom";
 
 const NewRegister = React.memo(() => {
   const history = useHistory();
-  const [checkCode, setCheckCode] = useState("");
   const [value, setValue] = useState({
     email: "",
     id: "",
@@ -21,13 +20,11 @@ const NewRegister = React.memo(() => {
     checkPsw: "",
     name: "",
   });
-  const [count, setCount] = useState(300);
-  const [codeStart, setCodeStart] = useState(false);
   const [state, setState] = useState({
     psw: false,
-    code: false,
     id: false,
   });
+  const [count, setCount] = useState(false);
   const timer = useRef();
   // 처음 비번 / 두번째 인증코드 / 세번째 ???
 
@@ -54,50 +51,19 @@ const NewRegister = React.memo(() => {
     }
   }, [value]);
 
-  const checkEmailNumber = () => {
-    if (count <= 0) {
-      alert("인증시간이 만료되었습니다. 다시 시도하세요.");
-      return;
-    }
-    if (checkCode === value.code) {
-      alert("인증번호가 확인되었습니다.");
-      setState({
-        ...state,
-        code: true,
-      });
-    }
-  };
-
-  // 타이머
-  useEffect(() => {
-    timer.current = setInterval(() => {
-      if (count <= 0) return;
-      if (codeStart === false) {
-        clearInterval(timer.current);
-        return;
-      }
-      setCount((prev) => prev - 1);
-    }, 1000);
-  }, [codeStart]);
-
-  useEffect(() => {
-    if (count <= 0) {
-      clearInterval(timer.current);
-    }
-  }, [count]);
-
   // 회원가입 확인 버튼
   const register = () => {
-    if (state.code === true && state.id === true && state.psw === true) {
+    const { id, psw, name, email, code } = value;
+    if (state.id === true && state.psw === true) {
       axios({
         url: "/auth/signup",
         method: "post",
         data: {
-          id: value.id,
-          password: value.psw,
-          name: value.name,
-          email: value.email,
-          authcode: value.code,
+          id,
+          password: psw,
+          name,
+          email,
+          authcode: code,
         },
       })
         .then((res) => {
@@ -113,6 +79,13 @@ const NewRegister = React.memo(() => {
     }
   };
 
+  useEffect(() => {
+    if (count <= 0) {
+      clearInterval(timer.current);
+      setCount(false);
+    }
+  }, [count]);
+
   // 이메일 인증코드 받기
   const EmailCheck = () => {
     if (value.email === "") {
@@ -120,6 +93,9 @@ const NewRegister = React.memo(() => {
       return;
     } else if (/@dsm.hs.kr/.exec(value.email) === null) {
       alert("이메일 양식이 맞지 않습니다.");
+      return;
+    } else if (count > 0) {
+      alert("아직 인증번호를 다시 받을 수 없습니다.");
       return;
     }
 
@@ -130,14 +106,20 @@ const NewRegister = React.memo(() => {
         email: value.email,
       },
     })
-      .then((res) => {
-        // 3분 제한 시작
-        setCodeStart(true);
-        setCount(300);
+      .then(() => {
+        alert("인증번호를 보냈습니다.");
+        setCount(30);
+        timer.current = setInterval(() => {
+          setCount((prev) => prev - 1);
+        }, 1000);
       })
       .catch((err) => {
-        console.log(err);
-        alert("인증코드 발송에 실패했습니다. 이메일을 확인하세요.");
+        console.log(err.response);
+        if (err.response.data.code === 403) {
+          alert("이미 회원가입한 이메일입니다.");
+        } else {
+          alert("인증코드 발송에 실패했습니다. 이메일을 확인하세요.");
+        }
       });
   };
 
@@ -176,20 +158,23 @@ const NewRegister = React.memo(() => {
           ></s.Input>
           <s.InputBtn onClick={EmailCheck}>인증코드 받기</s.InputBtn>
         </s.InputWrapper>
+        <s.SingUpDes
+          style={count === false ? { color: "#42a54a" } : { color: "tomato" }}
+        >
+          {count === false
+            ? "인증번호를 받을 수 있습니다."
+            : `${count}초 뒤 인증코드를 다시 받을 수 있습니다.`}
+        </s.SingUpDes>
         <s.InputWrapper>
           <s.Input
             placeholder="인증번호를 입력해주세요."
             onChange={InputVal}
             name="code"
             value={value.code}
+            style={{ width: "100%" }}
           ></s.Input>
-          <s.InputBtn onClick={checkEmailNumber}>인증코드 확인</s.InputBtn>
         </s.InputWrapper>
-        <s.SingUpDes>
-          남은 시간 {Math.floor(count / 60)}:
-          {(count % 60).toString().padStart(2, "0")}
-        </s.SingUpDes>
-        <s.InputWrapper style={{ marginTop: "2%" }}>
+        <s.InputWrapper>
           <s.Input
             placeholder="사용할 아이디를 입력해주세요."
             onChange={InputVal}
@@ -220,7 +205,7 @@ const NewRegister = React.memo(() => {
           ></s.Input>
         </s.InputWrapper>
         <s.SingUpDes
-          style={state.psw ? { color: "skyblue" } : { color: "tomato" }}
+          style={state.psw ? { color: "#42a54a" } : { color: "tomato" }}
         >
           {state.psw
             ? "비밀번호가 확인되었습니다!"
@@ -232,6 +217,7 @@ const NewRegister = React.memo(() => {
             onChange={InputVal}
             name="name"
             value={value.name}
+            style={{ width: "100%" }}
           ></s.Input>
         </s.InputWrapper>
         <s.BtnWrapper>

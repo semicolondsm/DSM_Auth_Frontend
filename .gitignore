@@ -23,5 +23,5 @@ yarn-debug.log*
 yarn-error.log
 
 .eslintcache
-/build/static
+/build/staticy
 /build/index.html
