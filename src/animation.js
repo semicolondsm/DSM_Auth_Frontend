@@ -98,9 +98,9 @@ export const Count = (max) => {
     if (getScroll() > getDivTop("count") + 400) {
       if (isPro) return;
       timer = setInterval(() => {
-        if (number >= max) clearInterval(timer);
         number += 1;
         self.innerText = number;
+        if (number >= max) clearInterval(timer);
       }, 1000 / max);
       isPro = true;
     } else {
