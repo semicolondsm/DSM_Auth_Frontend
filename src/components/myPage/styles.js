@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
 
 export const MyContainer = styled.div`
   width: 1140px;
-  margin: 150px auto 0;
+  margin: 150px auto;
 `;
 
 export const UserName = styled.p`
