@@ -6,12 +6,11 @@ export const Wrapper = styled.div`
   min-height: 500px;
   background: linear-gradient(#151717, black);
   overflow-y: scroll;
-  min-width: 1900px;
 `;
 
 export const MyContainer = styled.div`
   width: 1140px;
-  margin: 0 auto;
+  margin: 150px auto 0;
 `;
 
 export const UserName = styled.p`
