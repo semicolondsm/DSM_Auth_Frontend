@@ -9,13 +9,7 @@ import axios from "axios";
 
 import { useHistory } from "react-router-dom";
 
-import {
-  FirstAnimation,
-  SlideShow,
-  Welcome,
-  Count,
-  AutoScroll,
-} from "../../animation";
+import { SlideShow, Welcome, Count, AutoScroll } from "../../animation";
 
 const Me = [
   "매번 프로젝트에서 로그인을 만들라니까 너무 귀찮아요.",
@@ -28,7 +22,6 @@ const MainBody = (props) => {
   const history = useHistory();
 
   useEffect(() => {
-    FirstAnimation();
     SlideShow();
     Welcome();
     AutoScroll();
@@ -44,12 +37,6 @@ const MainBody = (props) => {
         console.log(err);
       });
   }, []);
-
-  const source = `
-    const foo = 'bar'
-    const bar = 'foo'
-    const baz = foo + bar
-  `;
 
   return (
     <S.BodyWrapper>
@@ -161,7 +148,7 @@ const MainBody = (props) => {
               <S.SFlexBox col bet>
                 {Me.map((message, i) => (
                   <S.MBox className="aM" i={i}>
-                    <img width="60" height="60" src={icon} />
+                    <img width="60" height="60" src={icon} alt="Person Icon" />
                     <p style={{ margin: "0 0 0 10px" }}>{message}</p>
                   </S.MBox>
                 ))}
@@ -200,6 +187,7 @@ const MainBody = (props) => {
               <S.ProfileImg
                 size="auto 100%"
                 src="https://cdn.pixabay.com/photo/2017/02/26/00/36/borders-2099226_960_720.png"
+                alt="Semicolon Logo"
               />
               <S.ProfileBottom>
                 <S.ProfileTitle>Semicolon; 대동여지도</S.ProfileTitle>
@@ -219,6 +207,7 @@ const MainBody = (props) => {
               <S.ProfileImg
                 size="90% auto"
                 src="https://cdn.pixabay.com/photo/2014/07/15/23/36/github-394322__340.png"
+                alt="Github"
               />
               <S.ProfileBottom>
                 <S.ProfileTitle>Semicolon; Github</S.ProfileTitle>
@@ -238,6 +227,7 @@ const MainBody = (props) => {
               <S.ProfileImg
                 size="100% auto"
                 src="https://cdn.pixabay.com/photo/2015/10/31/11/59/information-1015298__340.jpg"
+                alt="OAuth"
               />
               <S.ProfileBottom>
                 <S.ProfileTitle>OAuth란?</S.ProfileTitle>
@@ -258,6 +248,7 @@ const MainBody = (props) => {
               <S.ProfileImg
                 size="auto 100%"
                 src="https://cdn.pixabay.com/photo/2015/11/06/12/51/news-1027337__340.jpg"
+                alt="Semicolon mean"
               />
               <S.ProfileBottom>
                 <S.ProfileTitle>Semicolon; 의 뜻</S.ProfileTitle>

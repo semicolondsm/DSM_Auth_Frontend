@@ -55,12 +55,6 @@ const Login = (props) => {
       }
     }
     if (id === "" || password === "") {
-      if (id === "") {
-        // document.getElementById("id1").style.color = "red";
-      }
-      if (password === "") {
-        // document.getElementById("password1").style.color = "red";
-      }
       alert("아이디나 비밀번호를 입력하세요.");
       return;
     }

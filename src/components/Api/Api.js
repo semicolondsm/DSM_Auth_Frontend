@@ -171,8 +171,8 @@ const Api = (props) => {
     window.addEventListener("keydown", (event) => {
       const kcode = event.keyCode;
       if (kcode == 116) {
-        event.preventDefault();
         if (window.location.pathname.slice(1, 5) == "docs") {
+          event.preventDefault();
           window.location.href =
             window.location.origin + window.location.pathname.slice(0, 6);
         }

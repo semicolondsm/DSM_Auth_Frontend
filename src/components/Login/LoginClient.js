@@ -1,8 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import * as S from "./styles";
 
 import axios from "axios";
-import { useHistory } from "react-router-dom";
 
 import queryString from "query-string";
 
@@ -12,9 +11,6 @@ const LoginClient = (props) => {
   const query = queryString.parse(props.location.search);
   const [id, setId] = useState("");
   const [password, setPass] = useState("");
-  const [error, setErr] = useState([false, false]);
-  const check = useRef();
-  const history = useHistory();
 
   const login = (e) => {
     e.preventDefault();
@@ -26,12 +22,6 @@ const LoginClient = (props) => {
       }
     } */
     if (id === "" || password === "") {
-      if (id === "") {
-        // document.getElementById("id1").style.color = "red";
-      }
-      if (password === "") {
-        // document.getElementById("password1").style.color = "red";
-      }
       alert("아이디나 비밀번호를 입력하세요.");
       return;
     }
@@ -57,7 +47,7 @@ const LoginClient = (props) => {
   return (
     <S.Section nono>
       <S.Header>
-        <img height="100%" src={logo} />
+        <img height="100%" src={logo} alt="DSMAUTH" />
       </S.Header>
       <S.BodyWrapper>
         <S.ContentBox>

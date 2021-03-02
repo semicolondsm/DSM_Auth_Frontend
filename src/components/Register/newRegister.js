@@ -66,7 +66,7 @@ const NewRegister = React.memo(() => {
           authcode: code,
         },
       })
-        .then((res) => {
+        .then(() => {
           alert("회원가입 성공 !");
           history.push("/");
         })
@@ -207,7 +207,7 @@ const NewRegister = React.memo(() => {
         <s.SingUpDes
           style={state.psw ? { color: "#42a54a" } : { color: "tomato" }}
         >
-          {state.psw
+          {state.psw && value.psw !== ""
             ? "비밀번호가 확인되었습니다!"
             : "비밀번호가 맞지 않습니다!"}
         </s.SingUpDes>
@@ -218,7 +218,7 @@ const NewRegister = React.memo(() => {
             name="name"
             value={value.name}
             style={{ width: "100%" }}
-          ></s.Input>
+          />
         </s.InputWrapper>
         <s.BtnWrapper>
           <s.Btn onClick={() => history.goBack()}>취소</s.Btn>

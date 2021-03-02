@@ -1,9 +1,5 @@
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/all";
-
-gsap.registerPlugin(ScrollTrigger);
-
 function getDivTop(name) {
+  if (document.getElementById(name) == null) return;
   return document.getElementById(name).getBoundingClientRect().top;
 }
 
@@ -34,30 +30,6 @@ export const HeaderAnimation = () => {
         "rgba(26, 26, 28, 0)";
     }
   });
-};
-
-export const FirstAnimation = () => {
-  const asd = gsap.timeline();
-
-  asd
-    .from("#first", { x: -50, opacity: 0 })
-    .to("#first", { x: 0, opacity: 1, duration: 0.2 });
-
-  ScrollTrigger.create({
-    animation: asd,
-    trigger: "#first",
-    start: "-=500",
-    end: "+=200",
-    toggleActions: "play complete pause reset",
-  });
-};
-
-export const Show = (name) => {
-  const asd = gsap.timeline();
-
-  asd
-    .from(name, { opacity: 0, x: -80, duration: 1 })
-    .to(name, { x: 0, opacity: 1, duration: 1 });
 };
 
 export const SlideShow = () => {
@@ -94,7 +66,7 @@ export const Count = (max) => {
   let timer;
 
   window.addEventListener("scroll", () => {
-    if (pathname !== window.location.pathname) return;
+    if (pathname != window.location.pathname) return;
     if (getScroll() > getDivTop("count") + 400) {
       if (isPro) return;
       timer = setInterval(() => {
@@ -178,12 +150,3 @@ export const AutoScroll = () => {
     }
   });
 };
-
-function isInner(name) {
-  const self = document.getElementById(name);
-  if (document.documentElement.scrollTop >= self.getBoundingClientRect().top) {
-    return true;
-  } else {
-    return false;
-  }
-}

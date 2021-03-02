@@ -4,8 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import GlobalStyled from "./GlobalStyled";
 
-import { Main, Login, LoginClient } from "./components";
-import newRegister from "./components/Register/newRegister";
+import { Main, Login, LoginClient, newRegister } from "./components";
 
 function App() {
   useEffect(() => {

@@ -28,7 +28,7 @@ const Main = (props) => {
   useEffect(() => {
     window.onkeydown = function (event) {
       const kcode = event.keyCode;
-      if (kcode == 116) {
+      if (kcode === 116) {
         history.replace(window.location.pathname);
       }
     };
