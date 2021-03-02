@@ -69,8 +69,8 @@ const MainBody = (props) => {
               >
                 Open API
               </S.SButton>
-              <S.SButton onClick={() => history.push("/login")}>
-                로그인
+              <S.SButton onClick={() => history.push("/register")}>
+                회원가입
               </S.SButton>
             </S.ButtonBox>
           </S.H1Box>
