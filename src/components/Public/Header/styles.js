@@ -30,6 +30,11 @@ export const HeaderContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media screen and (max-width: 1720px) {
+    margin: 0 60px;
+    width: auto;
+  }
 `;
 
 export const LogoImg = styled.img`

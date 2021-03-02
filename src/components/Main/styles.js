@@ -9,6 +9,10 @@ export const Wrapper = styled.div`
 export const BodyWrapper = styled.div`
   max-width: 100%;
   min-width: 1600px;
+
+  @media screen and (max-width: 1620px) {
+    min-width: 0;
+  }
 `;
 
 export const Section = styled.div`
@@ -46,6 +50,16 @@ export const ContentBox = styled.div`
     css`
       align-items: flex-start;
     `}
+
+    ${(props) =>
+    props.nono &&
+    css`
+      overflow: visible;
+    `}
+  @media screen and (max-width: 1720px) {
+    margin: 0 60px;
+    width: auto;
+  }
 `;
 
 const fadeIn = keyframes`
@@ -161,16 +175,13 @@ export const ContentTitle = styled.h1`
 export const ApiBoxWrapper = styled.div`
   width: 100%;
   height: 350px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 1fr;
-  grid-gap: 90px;
-  justify-items: center;
+  display: flex;
+  justify-content: space-between;
   margin-top: 50px;
 `;
 
 export const ApiBox = styled.div`
-  width: 100%;
+  width: calc(100% / 5 + 30px);
   padding: 30px;
   background-color: #222222;
   display: flex;
@@ -260,6 +271,9 @@ export const SDes = styled.p`
 export const HalfBox = styled.div`
   width: 50%;
   height: ${(props) => props.height || "auto"};
+  @media screen and (max-width: 1580px) {
+    width: 55%;
+  }
 `;
 
 export const MBox = styled.div`
@@ -272,11 +286,16 @@ export const MBox = styled.div`
   color: white;
   font-weight: 500;
   display: flex;
-  transform: translate(${(props) => props.i * 85 - 50}px);
+  transform: translateX(${(props) => props.i * 85 - 50}px);
   opacity: 0;
   transition: 0.5s transform ease-out, 0.25s opacity linear;
   &:last-child {
     margin-bottom: 0;
+  }
+
+  @media screen and (max-width: 1700px) {
+    width: 530px;
+    height: 135px;
   }
 `;
 

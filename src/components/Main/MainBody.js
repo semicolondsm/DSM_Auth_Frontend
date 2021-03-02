@@ -148,7 +148,7 @@ const MainBody = (props) => {
         </S.ContentBox>
       </S.Section>
       <S.Section id="slidePoint" bgColor="black" height="auto">
-        <S.ContentBox stair column>
+        <S.ContentBox stair column nono>
           <S.ContentTitle>
             Made By <span style={{ fontWeight: 700 }}>Semicolon;</span>
           </S.ContentTitle>
