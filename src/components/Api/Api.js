@@ -9,91 +9,103 @@ import des2 from "../../assets/des2.PNG";
 import des3 from "../../assets/des3.PNG";
 import des4 from "../../assets/des4.PNG";
 
-const androidcode = `val instance=DsmSdk.instance
+import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import kotlin from "react-syntax-highlighter/dist/esm/languages/prism/kotlin";
+import swift from "react-syntax-highlighter/dist/esm/languages/prism/swift";
+import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
+SyntaxHighlighter.registerLanguage("kotlin", kotlin);
+
+const androidcode5 = `
+import com.semicolon.dsm_sdk_v1.DTOuser import\n
+com.semicolon.dsm_sdk_v1.DsmSdk import\n
+com.semicolon.dsm_sdk_v1.token`;
+
+const androidcode = `val instance=DsmSdk.instance\n
+\n
 instance.initSDK("<$client_id>","<$client_secret>","<$redirect_url>")`;
 
-const androidcode2 = `val tokenCallback:(DTOtoken?,Throwable?)->Unit={token,error->    //토큰을 받아왔을때의 콜백메서드
-  if(error!=null){
-      Log.e("sdk",error)
-  }
-  else if(token!=null){
-      val accessToken=token.access_token   //access토큰
-      val refreshToken=token.refresh_token //refresh토큰
-      Toast.makeText(this,"로그인 성공",Toast.LENGTH_SHORT).show()
-  }
-}
-
-val loginCallBack:(DTOuser?)->Unit={  //사용자 정보를 받아왔을때의 콜백메서드
-  val name=it?.name                //이름
-  val email=it?.email              //이메일
-  val gcn=it?.gcn                  //학번
-}
+const androidcode2 = `val tokenCallback:(DTOtoken?,Throwable?)->Unit={token,error->    //토큰을 받아왔을때의 콜백메서드\n
+ㅤif(error!=null){\n
+ㅤㅤLog.e("sdk",error)\n
+ㅤ}\n
+ㅤelse if(token!=null){\n
+ㅤㅤval accessToken=token.access_token   //access토큰\n
+ㅤㅤval refreshToken=token.refresh_token //refresh토큰\n
+ㅤㅤToast.makeText(this,"로그인 성공",Toast.LENGTH_SHORT).show()\n
+ㅤ}\n
+}\n
+\n
+val loginCallBack:(DTOuser?)->Unit={  //사용자 정보를 받아왔을때의 콜백메서드\n
+ㅤval name=it?.name                //이름\n
+ㅤval email=it?.email              //이메일\n
+ㅤval gcn=it?.gcn                  //학번\n
+}\n
 instance.loginWithAuth(this,callback,loginCallBack) //loginWithAuth메서드 호출`;
 
-const androidcode3 = `val acessTokenCallBack:(accessToken:String)->Unit={
-  Log.d("토큰",it)    //refreshToken이 잘못되거나 오류가 날 경우 null 이 반홥됩니다.
-}
+const androidcode3 = `val acessTokenCallBack:(accessToken:String)->Unit={\n
+ㅤLog.d("토큰",it)    //refreshToken이 잘못되거나 오류가 날 경우 null 이 반홥됩니다.\n
+}\n
 instance.refreshToken(refreshToken,acessTokenCallBack)`;
 
-const androidcode4 = `val checkToken:(DTOuser?)->Unit={
-  if (it != null) { //accessToken이 잘못되면 null이 반환됩니다.
-      Log.d("사용자",it.name)
-      Log.d("사용자",it.email)
-      Log.d("사용자",it.gcn)
-  }
-}
+const androidcode4 = `val checkToken:(DTOuser?)->Unit={\n
+ㅤif (it != null) { //accessToken이 잘못되면 null이 반환됩니다.\n
+ㅤㅤLog.d("사용자",it.name)\n
+ㅤㅤLog.d("사용자",it.email)\n
+ㅤㅤLog.d("사용자",it.gcn)\n
+ㅤ}\n
+}\n
 instance.getUserInformation(accessToken,checkToken)`;
 
-const swiftcode = `import DSMSDK
-
-func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-  
-  ...
-  DSMSDKCommon.initSDK(clientID: 〈CLIENT_ID〉,
-                       clientSecret: 〈CLIENT_SECRET〉,
-                       redirectURL: 〈REDIRECT_URL〉)
-  ...
-  
+const swiftcode = `import DSMSDK\n
+\n
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {\n
+\n
+ㅤ...\n
+ㅤDSMSDKCommon.initSDK(clientID: 〈CLIENT_ID〉,\n
+ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤclientSecret: 〈CLIENT_SECRET〉,\n
+ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤredirectURL: 〈REDIRECT_URL〉)\n
+ㅤ...\n
+ㅤ\n
 }`;
 
-const swiftcode2 = `DSMAUTH.loginWithDSMAuth(vc: self) { (token, error) in
-	if let error = error {
-		print(error)
-	}
-  else {
-    print("loginWithDSMAuth() success!")
-
-    //do something
-    _ = token!.Access_Token
-    _ = token!.Refresh_Token
-	}
+const swiftcode2 = `DSMAUTH.loginWithDSMAuth(vc: self) { (token, error) in\n
+ㅤif let error = error {\n
+ㅤㅤprint(error)\n
+ㅤ}\n
+ㅤelse {\n
+ㅤㅤprint("loginWithDSMAuth() success!")\n
+\n
+ㅤㅤ//do something\n
+ㅤㅤ_ = token!.Access_Token\n
+ㅤ_ = token!.Refresh_Token\n
+ㅤ}\n
 }`;
 
-const swiftcode3 = `DSMAUTH.tokenRefresh(refresh_token: 〈REFRESH_TOKEN〉){ (access_token, error) in
-	if let error = error{
-		print(error)
-	}
-	else{
-    print("tokenRefresh() success!")
-
-    //do something
-		_ = access_token!
-	}
+const swiftcode3 = `DSMAUTH.tokenRefresh(refresh_token: 〈REFRESH_TOKEN〉){ (access_token, error) in\n
+ㅤif let error = error{\n
+ㅤㅤprint(error)\n
+ㅤ}\n
+ㅤelse{\n
+ㅤㅤprint("tokenRefresh() success!")\n
+\n
+ㅤㅤ//do something\n
+ㅤㅤ_ = access_token!\n
+ㅤ}\n
 }`;
 
-const swiftcode4 = `DSMAUTH.me(access_token: 〈ACCESS_TOKEN〉){ (user, error) in
-	if let error = error{
-		print(error)
-	}
-	else{
-		print("me() success!")
-
-    //do something
-    _ = user!.name
-    _ = user!.StudentID
-    _ = user!.email
-	}
+const swiftcode4 = `DSMAUTH.me(access_token: 〈ACCESS_TOKEN〉){ (user, error) in\n
+ㅤif let error = error{\n
+ㅤㅤprint(error)\n
+ㅤ}\n
+ㅤelse{\n
+ㅤㅤprint("me() success!")\n
+\n
+ㅤㅤ//do something\n
+ㅤㅤ_ = user!.name\n
+ㅤㅤ_ = user!.StudentID\n
+ㅤㅤ_ = user!.email\n
+ㅤ}\n
 }`;
 
 const api1 = `Body
@@ -477,9 +489,9 @@ const Api = (props) => {
                   1. Module 수준의 build.gradle에 다음 dependencies 를
                   추가해줍니다.
                 </S.DocsDes>
-                <S.DocsCode>
+                <SyntaxHighlighter language="kotlin" style={atomDark}>
                   implementation 'com.semicolon.dsm_sdk_v1:dsmauth:1.2.8'
-                </S.DocsCode>
+                </SyntaxHighlighter>
                 <S.DocsDes>
                   2. <b>sync now</b> 를 클릭합니다.
                   <br />
@@ -487,19 +499,16 @@ const Api = (props) => {
                   3. sdk를 사용할때 원할한 인터넷통신을 위해서 다음코드를{" "}
                   <b>AndroidManifest.xml</b> 에 추가해줍니다.
                 </S.DocsDes>
-                <S.DocsCode>android:usesCleartextTraffic="true"</S.DocsCode>
+                <SyntaxHighlighter language="kotlin" style={atomDark}>
+                  android:usesCleartextTraffic="true"
+                </SyntaxHighlighter>
                 <S.DocsSubTitle>초기화</S.DocsSubTitle>
                 <S.DocsDes>
                   1. 사용할 클래스에서 DsmSdk파일을 import 해야합니다.
                 </S.DocsDes>
-                <S.DocsCode>
-                  import com.semicolon.dsm_sdk_v1.DTOuser import
-                  <br />
-                  com.semicolon.dsm_sdk_v1.DsmSdk import
-                  <br />
-                  com.semicolon.dsm_sdk_v1.token
-                  <br />
-                </S.DocsCode>
+                <SyntaxHighlighter language="kotlin" style={atomDark}>
+                  {androidcode5}
+                </SyntaxHighlighter>
                 <S.DocsDes>
                   2. 발급받은 client id,client secret, 그리고 프로젝트의
                   redirectURL(없을경우 발급받은 default redirectURL)을 통해서
@@ -509,7 +518,9 @@ const Api = (props) => {
                   <br /> - 예제의 홀화살괄호`〈 〉`로 감싸져 있는 부분은
                   사용자가 정의해주셔야합니다.
                 </S.DocsDes>
-                <S.DocsCode>{androidcode}</S.DocsCode>
+                <SyntaxHighlighter language="kotlin" style={atomDark}>
+                  {androidcode}
+                </SyntaxHighlighter>
               </S.DocsSection>
               <S.DocsSection>
                 <S.DocsTitle>로그인</S.DocsTitle>
@@ -529,7 +540,9 @@ const Api = (props) => {
                   <br />
                   <br /> - 예시코드
                 </S.DocsDes>
-                <S.DocsCode>{androidcode2}</S.DocsCode>
+                <SyntaxHighlighter language="kotlin" style={atomDark}>
+                  {androidcode2}
+                </SyntaxHighlighter>
               </S.DocsSection>
               <S.DocsSection>
                 <S.DocsTitle>토큰 재발급</S.DocsTitle>
@@ -541,7 +554,9 @@ const Api = (props) => {
                   <br />
                   <br /> - 예시코드
                 </S.DocsDes>
-                <S.DocsCode>{androidcode3}</S.DocsCode>
+                <SyntaxHighlighter language="kotlin" style={atomDark}>
+                  {androidcode3}
+                </SyntaxHighlighter>
               </S.DocsSection>
               <S.DocsSection>
                 <S.DocsTitle>사용자 정보 받아오기</S.DocsTitle>
@@ -554,7 +569,9 @@ const Api = (props) => {
                   <br />
                   <br />- 예시코드
                 </S.DocsDes>
-                <S.DocsCode>{androidcode4}</S.DocsCode>
+                <SyntaxHighlighter language="kotlin" style={atomDark}>
+                  {androidcode4}
+                </SyntaxHighlighter>
               </S.DocsSection>
               <S.DocsSection>
                 <S.DocsTitle>더보기</S.DocsTitle>
@@ -598,7 +615,9 @@ const Api = (props) => {
                   를 이용하여 간단하게 SDK를 설치 할 수 있습니다. Podfile에
                   DSMSDK를 추가합니다.
                 </S.DocsDes>
-                <S.DocsCode>pod 'DSMSDK'</S.DocsCode>
+                <SyntaxHighlighter language="swift" style={atomDark}>
+                  pod 'DSMSDK'
+                </SyntaxHighlighter>
                 <S.DocsSubTitle>
                   외부 라이브러리 디펜던시(External library dependency)
                 </S.DocsSubTitle>
@@ -619,7 +638,9 @@ const Api = (props) => {
                   코드를 추가합니다.
                   <br />
                   <br />
-                  <S.DocsCode>{swiftcode}</S.DocsCode>
+                  <SyntaxHighlighter language="swift" style={atomDark}>
+                    {swiftcode}
+                  </SyntaxHighlighter>
                 </S.DocsDes>
               </S.DocsSection>
               <S.DocsSection>
@@ -636,7 +657,9 @@ const Api = (props) => {
                   전달해야 합니다. token 구조체에는 엑세스 토큰(Access_Token)과
                   리프레쉬 토큰(Refresh_Token) 정보가 있습니다.
                 </S.DocsDes>
-                <S.DocsCode>{swiftcode2}</S.DocsCode>
+                <SyntaxHighlighter language="swift" style={atomDark}>
+                  {swiftcode2}
+                </SyntaxHighlighter>
               </S.DocsSection>
               <S.DocsSection>
                 <S.DocsTitle>토큰 재발급</S.DocsTitle>
@@ -645,8 +668,9 @@ const Api = (props) => {
                   파라미터로 로그인할 때 받아온 리프레쉬 토큰을 넣습니다.
                   <br /> 다음은 토큰을 재발급받는 예제입니다.
                 </S.DocsDes>
-
-                <S.DocsCode>{swiftcode3}</S.DocsCode>
+                <SyntaxHighlighter language="swift" style={atomDark}>
+                  {swiftcode3}
+                </SyntaxHighlighter>
               </S.DocsSection>
               <S.DocsSection>
                 <S.DocsTitle>사용자 정보 받아오기</S.DocsTitle>
@@ -656,7 +680,9 @@ const Api = (props) => {
                   <br /> 다음은 사용자 정보 요청 예제입니다. user 구조체에는
                   이름(name), 학번(StudentID), 이메일(email) 정보가 있습니다.
                 </S.DocsDes>
-                <S.DocsCode>{swiftcode4}</S.DocsCode>
+                <SyntaxHighlighter language="swift" style={atomDark}>
+                  {swiftcode4}
+                </SyntaxHighlighter>
               </S.DocsSection>
               <S.DocsSection>
                 <S.DocsTitle>더보기</S.DocsTitle>

@@ -35,6 +35,10 @@ const GlobalStyled = createGlobalStyle`
     .clicked::before {
         transform: translateY(-50%) rotate(50deg) !important;
     }
+
+    code span{
+        letter-spacing: -.3px;
+    }
 `;
 
 export default GlobalStyled;

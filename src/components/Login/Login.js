@@ -118,6 +118,7 @@ const Login = (props) => {
             value={password}
             type="password"
             onChange={(e) => setPass(e.target.value)}
+            style={{ fontSize: "30px", paddingBottom: "5px" }}
           />
           <S.Inter id="password1" on={password != "" ? true : false}>
             PASSWORD
