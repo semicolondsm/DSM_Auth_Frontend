@@ -284,6 +284,7 @@ export const CInput = styled.input`
 
   &::placeholder {
     color: rgb(210, 210, 210);
+    font-size: 15px;
   }
 
   @media only screen and (max-width: 768px) {
@@ -301,7 +302,7 @@ export const CButton = styled.button`
   outline: none;
   border-radius: 5px;
   margin-top: 20px;
-  font-size: 16px;
+  font-size: 18px;
   cursor: pointer;
 
   &:hover {

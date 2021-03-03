@@ -66,12 +66,14 @@ const LoginClient = (props) => {
               onChange={(e) => setId(e.target.value)}
               type="text"
               placeholder="ID"
+              style={{ letterSpacing: "0.5px" }}
             />
             <S.CInput
               value={password}
               onChange={(e) => setPass(e.target.value)}
               type="password"
               placeholder="Password"
+              style={{ letterSpacing: "1px", fontSize: "30px" }}
             />
             <S.CButton onClick={login}>Login</S.CButton>
           </form>
