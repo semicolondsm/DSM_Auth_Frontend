@@ -707,7 +707,7 @@ const Api = (props) => {
                   이 문서는 DSM Auth Open API에 관한 문서입니다.
                   <br />
                   <br />
-                  Base URL: https://api.dsmkr.com
+                  Base URL: https://developer-api.dsmkr.com
                 </S.DocsDes>
               </S.DocsSection>
               <S.DocsSection>
