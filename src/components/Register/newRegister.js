@@ -141,7 +141,11 @@ const NewRegister = React.memo(() => {
       })
       .catch((err) => {
         console.log(err);
-        alert("아이디가 중복됩니다 !");
+        if (err.response.code === 405) {
+          alert("아이디가 중복됩니다 !");
+        } else {
+          alert("요청 오류");
+        }
       });
   };
 
