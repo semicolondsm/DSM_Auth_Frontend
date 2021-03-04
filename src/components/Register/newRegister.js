@@ -31,6 +31,9 @@ const NewRegister = React.memo(() => {
   // 인풋값 받기
   const InputVal = (e) => {
     const { name } = e.target;
+    if (name === "id") {
+      setState({ ...state, id: false });
+    }
     setValue({
       ...value,
       [name]: e.target.value,
@@ -125,6 +128,14 @@ const NewRegister = React.memo(() => {
 
   // 아이디 중복 체크 함수
   const checkId = () => {
+    if (value.id === "") {
+      alert("아이디를 입력해주세요");
+      return;
+    }
+    if (state.id === true) {
+      alert("이미 확인된 아이디 입니다.");
+      return;
+    }
     axios({
       method: "post",
       url: "/auth/check/id",
@@ -187,7 +198,11 @@ const NewRegister = React.memo(() => {
           ></s.Input>
           <s.InputBtn onClick={checkId}>중복확인</s.InputBtn>
         </s.InputWrapper>
-        <s.SingUpDes>아이디 중복을 확인해주세요!</s.SingUpDes>
+        <s.SingUpDes>
+          {!state.id
+            ? "아이디 중복을 확인해주세요!"
+            : "아이디를 사용할 수 있습니다."}
+        </s.SingUpDes>
         <s.InputWrapper style={{ marginTop: "2%" }}>
           <s.Input
             placeholder="사용하실 비밀번호를 입력해주세요."
