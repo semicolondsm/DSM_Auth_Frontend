@@ -15,6 +15,7 @@ import swift from "react-syntax-highlighter/dist/esm/languages/prism/swift";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 SyntaxHighlighter.registerLanguage("kotlin", kotlin);
+SyntaxHighlighter.registerLanguage("swift", swift);
 
 const androidcode5 = `
 import com.semicolon.dsm_sdk_v1.DTOuser import\n
