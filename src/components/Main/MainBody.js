@@ -30,6 +30,7 @@ const MainBody = (props) => {
       url: "/consumer/list",
     })
       .then((res) => {
+        console.log(res.data);
         Count(res.data.length);
         setList(res.data);
       })
@@ -164,6 +165,7 @@ const MainBody = (props) => {
           </S.BigTitle>
           <S.ListWrapper id="scrollWrap">
             {list.length != 0 &&
+              Array.isArray(list) &&
               list.map((val) => (
                 <S.Item>
                   <span>{val.name}</span>
