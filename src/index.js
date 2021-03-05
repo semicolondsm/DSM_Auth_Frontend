@@ -8,7 +8,7 @@ import { CookiesProvider } from "react-cookie";
 
 import axios from "axios";
 
-axios.defaults.baseURL = "https://developer-api.dsmkr.com/";
+axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
 ReactDOM.render(
   <React.StrictMode>

@@ -6,25 +6,18 @@ import { useHistory } from "react-router-dom";
 
 import { useCookies } from "react-cookie";
 
-import queryString from "query-string";
-
 import logo from "../../assets/logo2.png";
 
 import LoginButton from "./LoginButton";
 
 const Login = (props) => {
-  const query = queryString.parse(props.location.search);
   const [id, setId] = useState("");
   const [password, setPass] = useState("");
-  const check = useRef();
   const history = useHistory();
   const [Rcookie] = useCookies(["refresh-token"]);
   const [Acookie, Aset] = useCookies(["access-token"]);
 
   useEffect(() => {
-    history.replace(
-      "login?redirect_url=https://developer.dsmkr.com&client_id=e6c15ee16718494f89de21eb19b4aae9"
-    );
     if (Rcookie["refresh-token"] !== undefined) {
       axios({
         method: "get",
@@ -47,13 +40,8 @@ const Login = (props) => {
 
   const login = (e) => {
     e.preventDefault();
-    const { redirect_url, client_id } = query;
-    if (!check.current.checked) {
-      alert("체크항목을 확인하세요.");
-      if (!(id === "" || password === "")) {
-        return;
-      }
-    }
+    const redirect_url = process.env.REACT_APP_REDIRECT_URL;
+    const client_id = process.env.REACT_APP_CLIENT_ID;
     if (id === "" || password === "") {
       alert("아이디나 비밀번호를 입력하세요.");
       return;
@@ -82,9 +70,6 @@ const Login = (props) => {
         }
       });
   };
-
-  if (Object.keys(query).length === 0) return <>Error</>;
-
   return (
     <S.Section bgColor="black">
       <S.Img
@@ -124,11 +109,6 @@ const Login = (props) => {
             PASSWORD
           </S.Inter>
         </S.InputWrapper>
-        <S.Agree>
-          개인정보 수집 이용 동의
-          <S.CheckBox id="asd" type="checkbox" ref={check} />
-          <S.Label htmlFor="asd" />
-        </S.Agree>
         <LoginButton onSubmit={login} />
       </form>
       <S.LinkA to="/register">계정이 없으신가요?</S.LinkA>

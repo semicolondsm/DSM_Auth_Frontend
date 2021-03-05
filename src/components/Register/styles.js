@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 export const Section = styled.div`
   background: ${(props) => props.bgColor || "white"};
@@ -124,4 +124,4 @@ export const LinkA = styled(Link)`
   font-size: 15px;
   margin-top: 20px;
   color: white;
-`
+`;

@@ -26,6 +26,7 @@ const NewRegister = React.memo(() => {
   });
   const [count, setCount] = useState(false);
   const timer = useRef();
+  const check = useRef();
   // 처음 비번 / 두번째 인증코드 / 세번째 ???
 
   // 인풋값 받기
@@ -59,6 +60,10 @@ const NewRegister = React.memo(() => {
 
   // 회원가입 확인 버튼
   const register = () => {
+    if (!check.current.checked) {
+      alert("체크항목을 확인하세요.");
+      return;
+    }
     const { id, psw, name, email, code } = value;
     if (state.id === true && state.psw === true) {
       axios({
@@ -246,6 +251,11 @@ const NewRegister = React.memo(() => {
             type="text"
           />
         </s.InputWrapper>
+        <s.Agree>
+          개인정보 수집 이용 동의
+          <s.CheckBox id="asd" type="checkbox" ref={check} />
+          <s.Label htmlFor="asd" />
+        </s.Agree>
         <s.BtnWrapper>
           <s.Btn onClick={() => history.goBack()}>취소</s.Btn>
           <s.Btn onClick={register}>확인</s.Btn>
