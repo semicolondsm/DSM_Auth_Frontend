@@ -8,7 +8,7 @@ import { useCookies } from "react-cookie";
 
 import queryString from "query-string";
 
-import logo from "../../assets/ass.svg";
+import logo from "../../assets/logo2.png";
 
 import LoginButton from "./LoginButton";
 

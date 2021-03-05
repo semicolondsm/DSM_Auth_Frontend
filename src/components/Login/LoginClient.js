@@ -5,7 +5,7 @@ import axios from "axios";
 
 import queryString from "query-string";
 
-import logo from "../../assets/ass.svg";
+import logo from "../../assets/logo2.png";
 
 const LoginClient = (props) => {
   const query = queryString.parse(props.location.search);
@@ -68,12 +68,12 @@ const LoginClient = (props) => {
               placeholder="ID"
               style={{ letterSpacing: "0.5px" }}
             />
-            <S.CInput
+            <S.CPInput
               value={password}
               onChange={(e) => setPass(e.target.value)}
               type="password"
               placeholder="Password"
-              style={{ letterSpacing: "1px", fontSize: "2rem" }}
+              style={{ letterSpacing: "1.2px" }}
             />
             <S.CButton onClick={login}>Login</S.CButton>
           </form>

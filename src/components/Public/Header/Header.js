@@ -6,6 +6,8 @@ import { HeaderAnimation } from "../../../animation";
 import { useHistory } from "react-router-dom";
 
 import logo from "../../../assets/ass.svg";
+import logo2 from "../../../assets/logo.png";
+import logo3 from "../../../assets/logo2.png";
 
 import Menu from "./Menu";
 
@@ -57,10 +59,11 @@ const Header = ({ login, LogOut, AToken, switchPage }) => {
     <S.HeaderWrapper id="header">
       <S.HeaderContent>
         <S.LogoImg
-          src={logo}
+          src={logo3}
           onClick={() => {
             history.push("/");
           }}
+          style={{ height: "75%" }}
         />
         <S.NaviWrapper>
           <S.NaviWrapper>

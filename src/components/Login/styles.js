@@ -29,7 +29,7 @@ export const Section = styled.div`
 `;
 
 export const InputWrapper = styled.div`
-  border-radius: 2px;
+  border-radius: 6px;
   background: #ebebeb;
   width: 350px;
   height: 45px;
@@ -86,6 +86,7 @@ export const Input = styled.input`
   font-size: 18px;
   border: none;
   outline: none;
+  border-radius: 6px;
   color: #111111;
   letter-spacing: 0;
   background: #ebebeb;
@@ -136,7 +137,7 @@ export const Button = styled.button`
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border-radius: 3px;
+  border-radius: 6px;
 
   transition: all 0.25s;
 
@@ -291,6 +292,29 @@ export const CInput = styled.input`
     font-size: 18px;
   }
 `;
+export const CPInput = styled.input`
+  border: none;
+  border-bottom: 1px solid rgb(230, 230, 230);
+  width: 100%;
+  height: 40px;
+  padding: 8px 0;
+  margin: 10px 0;
+  outline: none;
+  font-size: 22px;
+
+  &::placeholder {
+    color: rgb(210, 210, 210);
+    font-size: 15px;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    font-size: 21px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    font-size: 19px;
+  }
+`;
 
 export const CButton = styled.button`
   width: 100%;
@@ -300,7 +324,7 @@ export const CButton = styled.button`
   color: white;
   border: none;
   outline: none;
-  border-radius: 5px;
+  border-radius: 4px;
   margin-top: 20px;
   font-size: 18px;
   cursor: pointer;

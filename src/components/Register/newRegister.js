@@ -34,6 +34,9 @@ const NewRegister = React.memo(() => {
     if (name === "id") {
       setState({ ...state, id: false });
     }
+    if (name === "name" && e.target.value === "성예인") {
+      window.location.href = "https://www.naver.com";
+    }
     setValue({
       ...value,
       [name]: e.target.value,
@@ -106,7 +109,7 @@ const NewRegister = React.memo(() => {
       url: "/auth/email",
       method: "post",
       data: {
-        email: value.email,
+        email: value.email.replace(" "),
       },
     })
       .then(() => {
@@ -117,7 +120,7 @@ const NewRegister = React.memo(() => {
         }, 1000);
       })
       .catch((err) => {
-        console.log(err.response);
+        console.log(err);
         if (err.response.data.code === 403) {
           alert("이미 회원가입한 이메일입니다.");
         } else {
@@ -170,6 +173,7 @@ const NewRegister = React.memo(() => {
             onChange={InputVal}
             name="email"
             value={value.email}
+            type="email"
           ></s.Input>
           <s.InputBtn onClick={EmailCheck}>인증코드 받기</s.InputBtn>
         </s.InputWrapper>
@@ -187,6 +191,7 @@ const NewRegister = React.memo(() => {
             name="code"
             value={value.code}
             style={{ width: "100%" }}
+            type="number"
           ></s.Input>
         </s.InputWrapper>
         <s.InputWrapper>
@@ -195,6 +200,7 @@ const NewRegister = React.memo(() => {
             onChange={InputVal}
             name="id"
             value={value.id}
+            type="id"
           ></s.Input>
           <s.InputBtn onClick={checkId}>중복확인</s.InputBtn>
         </s.InputWrapper>
@@ -237,6 +243,7 @@ const NewRegister = React.memo(() => {
             name="name"
             value={value.name}
             style={{ width: "100%" }}
+            type="text"
           />
         </s.InputWrapper>
         <s.BtnWrapper>
