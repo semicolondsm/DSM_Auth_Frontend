@@ -142,11 +142,24 @@ export const AutoScroll = () => {
         } else {
           scroll();
         }
-      }, 3500);
+      }, 4000);
       isOn = true;
     } else {
       clearInterval(timer);
       isOn = false;
     }
+  });
+
+  self.addEventListener("scroll", () => {
+    clearInterval(timer);
+    const sh = self.scrollHeight;
+    const ch = self.clientHeight;
+    timer = setInterval(() => {
+      if (self.scrollTop + ch === sh) {
+        scrollTop();
+      } else {
+        scroll();
+      }
+    }, 3500);
   });
 };

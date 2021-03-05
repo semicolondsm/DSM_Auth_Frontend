@@ -39,8 +39,14 @@ const LoginClient = (props) => {
         window.location.href = res.data.location;
       })
       .catch((err) => {
-        alert("아이디나 비밀번호가 틀렸습니다.");
-        console.log(err);
+        switch (err.response.status) {
+          case 401:
+            alert("아이디나 비밀번호가 틀렸습니다.");
+            break;
+          default:
+            alert("에러가 났습니다 !");
+            break;
+        }
       });
   };
 
