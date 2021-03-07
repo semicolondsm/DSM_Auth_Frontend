@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
 `;
 
 export const MyContainer = styled.div`
-  width: 1140px;
+  width: 1200px;
   margin: 150px auto;
 `;
 
@@ -235,7 +235,7 @@ export const AppDetail = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  font-size: 18px;
+  font-size: 16.5px;
   color: #a4a4a4;
   font-weight: 500;
   p {
