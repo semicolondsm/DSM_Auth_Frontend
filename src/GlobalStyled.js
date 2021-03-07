@@ -39,6 +39,13 @@ const GlobalStyled = createGlobalStyle`
     code span{
         letter-spacing: -.3px;
     }
+
+    .red::placeholder {
+        color: tomato;
+    }
+    .red {
+        border: 1px solid red;
+    }
 `;
 
 export default GlobalStyled;

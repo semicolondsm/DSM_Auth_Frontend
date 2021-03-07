@@ -1,6 +1,6 @@
 import * as s from "./newStyle";
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useDebugValue } from "react";
 
 import axios from "axios";
 
@@ -35,11 +35,39 @@ const NewRegister = React.memo(() => {
   const [idLoading, setIdLoading] = useState(false);
   const timer = useRef();
   const check = useRef();
+  const pw = useRef();
+  const pw2 = useRef();
+  const id1 = useRef();
+  const idjung = useRef();
+  const number = useRef();
+  const email1 = useRef();
+  const name1 = useRef();
+  const box = useRef();
   // 처음 비번 / 두번째 인증코드 / 세번째 ???
 
   // 인풋값 받기
   const InputVal = (e) => {
     const { name } = e.target;
+    switch (name) {
+      case "id":
+        id1.current.classList.remove("red");
+        break;
+      case "psw":
+        pw.current.classList.remove("red");
+        break;
+      case "code":
+        number.current.classList.remove("red");
+        break;
+      case "checkPsw":
+        pw2.current.classList.remove("red");
+        break;
+      case "name":
+        name1.current.classList.remove("red");
+        break;
+      case "email":
+        email1.current.classList.remove("red");
+        break;
+    }
     if (name === "id") {
       setState({ ...state, id: false });
     }
@@ -54,11 +82,13 @@ const NewRegister = React.memo(() => {
 
   useEffect(() => {
     if (value.psw === value.checkPsw && value.psw !== "") {
+      pw2.current.classList.remove("red");
       setState({
         ...state,
         psw: true,
       });
     } else {
+      pw2.current.classList.add("red");
       setState({
         ...state,
         psw: false,
@@ -68,12 +98,17 @@ const NewRegister = React.memo(() => {
 
   // 회원가입 확인 버튼
   const register = () => {
-    if (!check.current.checked) {
-      alert("체크항목을 확인하세요.");
-      return;
-    }
-    const { id, psw, name, email, code } = value;
-    if (state.id === true && state.psw === true) {
+    const { id, psw, name, email, code, checkPsw } = value;
+    if (
+      state.id === true &&
+      state.psw === true &&
+      id !== "" &&
+      name !== "" &&
+      psw !== "" &&
+      email !== "" &&
+      code !== "" &&
+      checkPsw !== ""
+    ) {
       setLoading(true);
       axios({
         url: "/auth/signup",
@@ -134,11 +169,45 @@ const NewRegister = React.memo(() => {
             });
         })
         .catch((err) => {
+          switch (err.response.status) {
+            case 401:
+              alert("코드가 잘못되었습니다.");
+              number.current.classList.add("red");
+              break;
+            case 404:
+              alert("이메일을 다시 확인해주세요");
+              email1.current.classList.add("red");
+              break;
+            default:
+              alert("요청 오류");
+          }
           setLoading(false);
-          alert("회원가입 실패 !");
         });
     } else {
       alert("모든 양식을 마쳐주세요!");
+      if (value.id === "") {
+        id1.current.classList.add("red");
+      }
+      if (value.psw === "") {
+        pw.current.classList.add("red");
+      } else if (state.psw === false) {
+        pw2.current.classList.add("red");
+      }
+      if (value.name === "") {
+        name1.current.classList.add("red");
+      }
+      if (state.id === false) {
+        idjung.current.classList.add("red");
+      }
+      if (value.code === "") {
+        number.current.classList.add("red");
+      }
+      if (value.email === "") {
+        email1.current.classList.add("red");
+      }
+      if (!check.current.checked) {
+        box.current.style.border = "1px solid red";
+      }
     }
   };
 
@@ -217,6 +286,7 @@ const NewRegister = React.memo(() => {
     })
       .then((res) => {
         alert("아이디가 사용 가능합니다 !");
+        idjung.current.classList.remove("red");
         setState({
           ...state,
           id: true,
@@ -245,13 +315,16 @@ const NewRegister = React.memo(() => {
             name="email"
             value={value.email}
             type="email"
-          ></s.Input>
+            ref={email1}
+          />
           <s.InputBtn onClick={EmailCheck}>인증코드 받기</s.InputBtn>
         </s.InputWrapper>
         <s.SingUpDes
           style={count === false ? { color: "#42a54a" } : { color: "tomato" }}
         >
-          {count === false
+          {value.email === ""
+            ? ""
+            : count === false
             ? "인증번호를 받을 수 있습니다."
             : `${count}초 뒤 인증코드를 다시 받을 수 있습니다.`}
         </s.SingUpDes>
@@ -263,7 +336,8 @@ const NewRegister = React.memo(() => {
             value={value.code}
             style={{ width: "100%" }}
             type="number"
-          ></s.Input>
+            ref={number}
+          />
         </s.InputWrapper>
         <s.InputWrapper>
           <s.Input
@@ -272,11 +346,16 @@ const NewRegister = React.memo(() => {
             name="id"
             value={value.id}
             type="id"
-          ></s.Input>
-          <s.InputBtn onClick={checkId}>중복확인</s.InputBtn>
+            ref={id1}
+          />
+          <s.InputBtn onClick={checkId} ref={idjung}>
+            중복확인
+          </s.InputBtn>
         </s.InputWrapper>
         <s.SingUpDes>
-          {!state.id
+          {value.id === ""
+            ? ""
+            : !state.id
             ? "아이디 중복을 확인해주세요!"
             : "아이디를 사용할 수 있습니다."}
         </s.SingUpDes>
@@ -288,7 +367,8 @@ const NewRegister = React.memo(() => {
             onChange={InputVal}
             name="psw"
             value={value.psw}
-          ></s.Input>
+            ref={pw}
+          />
         </s.InputWrapper>
         <s.InputWrapper>
           <s.Input
@@ -298,12 +378,15 @@ const NewRegister = React.memo(() => {
             onChange={InputVal}
             name="checkPsw"
             value={value.checkPsw}
-          ></s.Input>
+            ref={pw2}
+          />
         </s.InputWrapper>
         <s.SingUpDes
           style={state.psw ? { color: "#42a54a" } : { color: "tomato" }}
         >
-          {state.psw && value.psw !== ""
+          {value.psw === "" && value.checkPsw === ""
+            ? ""
+            : state.psw
             ? "비밀번호가 확인되었습니다!"
             : "비밀번호가 맞지 않습니다!"}
         </s.SingUpDes>
@@ -315,6 +398,7 @@ const NewRegister = React.memo(() => {
             value={value.name}
             style={{ width: "100%" }}
             type="text"
+            ref={name1}
           />
         </s.InputWrapper>
         <s.Agree
@@ -323,7 +407,11 @@ const NewRegister = React.memo(() => {
         >
           개인정보 수집 이용 동의
           <s.CheckBox id="asd" type="checkbox" ref={check} />
-          <s.Label htmlFor="asd" />
+          <s.Label
+            htmlFor="asd"
+            ref={box}
+            onClick={() => (box.current.style.border = "none")}
+          />
         </s.Agree>
         <s.BtnWrapper>
           <s.Btn onClick={() => history.goBack()}>취소</s.Btn>
