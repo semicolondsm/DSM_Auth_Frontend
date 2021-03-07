@@ -70,6 +70,7 @@ const NewRegister = React.memo(() => {
     }
     if (name === "id") {
       setState({ ...state, id: false });
+      setIdLoading(false);
     }
     if (name === "name" && e.target.value === "성예인") {
       window.location.href = "https://www.naver.com";
