@@ -170,7 +170,7 @@ const MainBody = (props) => {
             현재 <span id="count">0</span>개의 서비스가 DSM Auth와 함께합니다.
           </S.BigTitle>
           <S.ListWrapper id="scrollWrap">
-            {list.length != 0
+            {list.length != 0 && Array.isArray(list)
               ? list.map((val) => (
                   <S.Item>
                     <span>{val.name}</span>
