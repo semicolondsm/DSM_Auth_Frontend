@@ -24,25 +24,19 @@ const MainBody = (props) => {
   useEffect(() => {
     SlideShow();
     Welcome();
-    if (!sessionStorage.getItem("list")) {
-      axios({
-        method: "get",
-        url: "/consumer/list",
+    axios({
+      method: "get",
+      url: "/consumer/list",
+    })
+      .then((res) => {
+        Count(res.data.length);
+        setList(res.data);
+        sessionStorage.setItem("list", JSON.stringify(res.data));
+        AutoScroll();
       })
-        .then((res) => {
-          Count(res.data.length);
-          setList(res.data);
-          sessionStorage.setItem("list", JSON.stringify(res.data));
-          AutoScroll();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      const list = JSON.parse(sessionStorage.getItem("list"));
-      Count(list.length);
-      setList(list);
-    }
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   return (

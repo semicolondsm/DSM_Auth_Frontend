@@ -43,6 +43,7 @@ const RegisterModal = ({ style, setModalOn }) => {
     })
       .then(() => {
         window.location.href = "/mypage";
+        sessionStorage.removeItem("services");
         /*             history.replace('/api') */
       })
       .catch((err) => {
