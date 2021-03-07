@@ -72,6 +72,9 @@ const NewRegister = React.memo(() => {
       setState({ ...state, id: false });
       setIdLoading(false);
     }
+    if (name === "email") {
+      setELoading(false);
+    }
     if (name === "name" && e.target.value === "성예인") {
       window.location.href = "https://www.naver.com";
     }
