@@ -6,20 +6,20 @@ import axios from "axios";
 
 import React, { useEffect, useState } from "react";
 
+import Loading from "../Public/Loading/Loading";
+
 const RegisterModal = ({ style, setModalOn }) => {
   const [Acookie] = useCookies(["access-token"]);
-
   const [AppValue, setValue] = useState({
     name: "",
     domain: "",
     url: "",
   });
-
   const [modal, setModal] = useState(style);
   useEffect(() => {
     setModal(style);
   }, [style]);
-
+  const [loading, setLoading] = useState(false);
   const InputVal = (e) => {
     const { name, value } = e.target;
     setValue({
@@ -29,6 +29,14 @@ const RegisterModal = ({ style, setModalOn }) => {
   };
 
   const registerApp = () => {
+    setLoading(true);
+    if (
+      /^https\:\/\/|http\:\/\//.exec(AppValue.domain) === null ||
+      /^https\:\/\/|http\:\/\//.exec(AppValue.redirect_url) === null
+    ) {
+      alert("도메인이나 리다이렉트 URL이 유효하지 않습니다 !");
+      return;
+    }
     axios({
       method: "post",
       url: "/consumer/registration",
@@ -47,6 +55,7 @@ const RegisterModal = ({ style, setModalOn }) => {
         /*             history.replace('/api') */
       })
       .catch((err) => {
+        setLoading(false);
         console.log(err);
         alert("등록에 실패했습니다.");
       });
@@ -54,6 +63,7 @@ const RegisterModal = ({ style, setModalOn }) => {
 
   return (
     <>
+      {loading && <Loading />}
       <S.ModalWrapper
         style={
           modal
