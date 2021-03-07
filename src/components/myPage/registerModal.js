@@ -29,22 +29,14 @@ const RegisterModal = ({ style, setModalOn }) => {
   };
 
   const registerApp = () => {
-    setLoading(true);
-    console.log(
-      AppValue.domain,
-      AppValue.redirect_url,
-      /^https\:\/\/|http\:\/\//.exec(AppValue.domain)
-    );
     if (
       /^https\:\/\/|http\:\/\//.exec(AppValue.domain) === null ||
-      /^https\:\/\/|http\:\/\//.exec(AppValue.redirect_url) === null
+      /^https\:\/\/|http\:\/\//.exec(AppValue.url) === null
     ) {
       alert("도메인이나 리다이렉트 URL이 유효하지 않습니다 !");
       return;
     }
-    if (loading) {
-      return;
-    }
+    setLoading(true);
     axios({
       method: "post",
       url: "/consumer/registration",
