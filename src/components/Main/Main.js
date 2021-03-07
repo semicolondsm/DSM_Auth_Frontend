@@ -69,6 +69,8 @@ const Main = (props) => {
   const LogOut = () => {
     Aremove("access-token");
     Rremove("refresh-token");
+    sessionStorage.removeItem("infor");
+    sessionStorage.removeItem("services");
 
     setLogin(false);
 
