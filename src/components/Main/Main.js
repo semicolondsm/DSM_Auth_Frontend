@@ -32,36 +32,7 @@ const Main = (props) => {
         history.replace(window.location.pathname);
       }
     };
-    const client_id = process.env.REACT_APP_CLIENT_ID;
-    const client_secret = process.env.REACT_APP_CLIENT_SECRET;
-    if (
-      query.code &&
-      Acookie["access-token"] === undefined &&
-      Rcookie["refresh-token"] === undefined
-    ) {
-      axios({
-        method: "post",
-        url: "/dsmauth/token",
-        data: {
-          code: query.code,
-          client_id,
-          client_secret,
-        },
-      })
-        .then((res) => {
-          Aset("access-token", res.data["access-token"], {
-            expires: new Date(Date.now() + 1000 * 60 * 60 * 2),
-          });
-          Rset("refresh-token", res.data["refresh-token"], {
-            expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 14),
-          });
-          setLogin(true);
-          history.replace(window.location.pathname);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else if (Acookie["access-token"] !== undefined) {
+    if (Acookie["access-token"] !== undefined) {
       setLogin(true);
     }
   }, []);

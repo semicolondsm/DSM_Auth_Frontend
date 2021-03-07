@@ -85,7 +85,50 @@ const NewRegister = React.memo(() => {
       })
         .then(() => {
           alert("회원가입 성공 !");
-          history.push("/");
+          const redirect_url = process.env.REACT_APP_REDIRECT_URL;
+          const client_id = process.env.REACT_APP_CLIENT_ID;
+          axios({
+            url: "/dsmauth/login",
+            method: "post",
+            data: {
+              id: value.id,
+              password: value.psw,
+              redirect_url,
+              client_id,
+            },
+          })
+            .then((res) => {
+              const code = /(?<=\/\?code\=)[a-z|0-9|-]+(?=\/)?/.exec(
+                res.data.location
+              );
+              const client_id = process.env.REACT_APP_CLIENT_ID;
+              const client_secret = process.env.REACT_APP_CLIENT_SECRET;
+              axios({
+                method: "post",
+                url: "/dsmauth/token",
+                data: {
+                  code,
+                  client_id,
+                  client_secret,
+                },
+              })
+                .then((res) => {
+                  Aset("access-token", res.data["access-token"], {
+                    expires: new Date(Date.now() + 1000 * 60 * 60 * 2),
+                  });
+                  Rset("refresh-token", res.data["refresh-token"], {
+                    expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 14),
+                  });
+                  history.push("/");
+                })
+                .catch((err) => {
+                  history.push("/");
+                });
+            })
+            .catch((err) => {
+              console.log("login error");
+              history.push("/");
+            });
         })
         .catch((err) => {
           setLoading(false);
