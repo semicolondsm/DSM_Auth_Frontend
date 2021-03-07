@@ -14,8 +14,8 @@ import { useCookies } from "react-cookie";
 // 아이디 중복 체크 성공
 
 const NewRegister = React.memo(() => {
-  const [Acookie, Aset, Aremove] = useCookies(["access-token"]);
-  const [Rcookie, Rset, Rremove] = useCookies(["refresh-token"]);
+  const [Acookie, Aset] = useCookies(["access-token"]);
+  const [Rcookie, Rset] = useCookies(["refresh-token"]);
   const history = useHistory();
   const [value, setValue] = useState({
     email: "",
@@ -101,7 +101,7 @@ const NewRegister = React.memo(() => {
             },
           })
             .then((res) => {
-              const code = /(?<=\/\?code\=)[a-z|0-9|-]+(?=\/)?/.exec(
+              const code = /(?<=\?code\=)[a-z|0-9|-]+(?=\/)?/.exec(
                 res.data.location
               );
               const client_id = process.env.REACT_APP_CLIENT_ID;
