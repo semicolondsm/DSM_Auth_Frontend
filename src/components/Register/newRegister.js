@@ -136,9 +136,9 @@ const NewRegister = React.memo(() => {
             },
           })
             .then((res) => {
-              const code = /(?<=\?code\=)[a-z|0-9|-]+(?=\/)?/.exec(
-                res.data.location
-              );
+              // const code = /(?<=\?code\=)[a-z|0-9|-]+(?=\/)?/.exec(
+              //   res.data.location
+              // );
               const client_id = process.env.REACT_APP_CLIENT_ID;
               const client_secret = process.env.REACT_APP_CLIENT_SECRET;
               axios({
