@@ -22,6 +22,7 @@ const Login = (props) => {
 
   useEffect(() => {
     if (Rcookie["refresh-token"] !== undefined) {
+      setLoading(true);
       axios({
         method: "get",
         url: "/dsmauth/refresh",
@@ -36,6 +37,7 @@ const Login = (props) => {
           history.push("/");
         })
         .catch((err) => {
+          setLoading(false);
           console.log(err);
         });
     }

@@ -11,6 +11,8 @@ import { useHistory } from "react-router-dom";
 
 import { SlideShow, Welcome, Count, AutoScroll } from "../../animation";
 
+import { useCookies } from "react-cookie";
+
 const Me = [
   "매번 프로젝트에서 로그인을 만들라니까 너무 귀찮아요.",
   "프로젝트를 이용하는데 매번 계정을 만들기 힘들어요.",
@@ -19,6 +21,7 @@ const Me = [
 
 const MainBody = (props) => {
   const [list, setList] = useState([]);
+  const [Acookie] = useCookies(["access-token"]);
   const history = useHistory();
 
   useEffect(() => {
@@ -57,8 +60,14 @@ const MainBody = (props) => {
               >
                 Open API
               </S.SButton>
-              <S.SButton onClick={() => history.push("/register")}>
-                회원가입
+              <S.SButton
+                onClick={() =>
+                  Acookie["access-token"]
+                    ? history.push("/mypage")
+                    : history.push("/register")
+                }
+              >
+                {Acookie["access-token"] ? "마이페이지" : "회원가입"}
               </S.SButton>
             </S.ButtonBox>
           </S.H1Box>
