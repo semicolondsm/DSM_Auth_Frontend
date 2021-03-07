@@ -7,12 +7,15 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 
 import Loading from "../Public/Loading/Loading";
+import { useCookies } from "react-cookie";
 
 // 비번 확인 됨
 // 인증번호 확인 성공
 // 아이디 중복 체크 성공
 
 const NewRegister = React.memo(() => {
+  const [Acookie, Aset, Aremove] = useCookies(["access-token"]);
+  const [Rcookie, Rset, Rremove] = useCookies(["refresh-token"]);
   const history = useHistory();
   const [value, setValue] = useState({
     email: "",

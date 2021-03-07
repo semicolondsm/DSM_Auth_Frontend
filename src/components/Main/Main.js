@@ -13,12 +13,7 @@ import { useCookies } from "react-cookie";
 
 import { useHistory } from "react-router-dom";
 
-import axios from "axios";
-
-import queryString from "query-string";
-
 const Main = (props) => {
-  const query = queryString.parse(props.location.search);
   const [Acookie, Aset, Aremove] = useCookies(["access-token"]);
   const [Rcookie, Rset, Rremove] = useCookies(["refresh-token"]);
   const [loginState, setLogin] = useState(false);

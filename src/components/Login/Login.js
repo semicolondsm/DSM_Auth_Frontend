@@ -16,7 +16,7 @@ const Login = (props) => {
   const [id, setId] = useState("");
   const [password, setPass] = useState("");
   const history = useHistory();
-  const [Rcookie] = useCookies(["refresh-token"]);
+  const [Rcookie, Rset] = useCookies(["refresh-token"]);
   const [Acookie, Aset] = useCookies(["access-token"]);
   const [loading, setLoading] = useState(false);
 
