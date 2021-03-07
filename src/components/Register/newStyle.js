@@ -69,6 +69,12 @@ export const InputBtn = styled.button`
   font-weight: 500;
   transform: skew(-0.1deg);
   font-family: "Noto Sans KR", sans-serif;
+  transition: 0.25s all ease;
+
+  &:active {
+    border: 1px solid #713eff;
+    background: transparent;
+  }
 `;
 
 export const BtnWrapper = styled.div`
