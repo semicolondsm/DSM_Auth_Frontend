@@ -22,7 +22,7 @@ const Header = ({ login, LogOut, AToken, switchPage }) => {
   useEffect(() => {
     if (login === true) {
       setLog(true);
-      if (sessionStorage.getItem("name") == undefined) {
+      if (!sessionStorage.getItem("infor")) {
         axios({
           method: "get",
           url: "/v1/info/basic",
@@ -32,12 +32,14 @@ const Header = ({ login, LogOut, AToken, switchPage }) => {
         })
           .then((res) => {
             setName(res.data.name);
+            sessionStorage.setItem("infor", JSON.stringify(res.data));
           })
           .catch((err) => {
             console.log(err);
           });
       } else {
-        setName(sessionStorage.getItem("name"));
+        const infor = JSON.parse(sessionStorage.getItem("infor"));
+        setName(infor.name);
       }
     } else {
       setLog(false);

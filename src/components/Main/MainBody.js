@@ -24,19 +24,25 @@ const MainBody = (props) => {
   useEffect(() => {
     SlideShow();
     Welcome();
-    AutoScroll();
-    axios({
-      method: "get",
-      url: "/consumer/list",
-    })
-      .then((res) => {
-        console.log(res.data);
-        Count(res.data.length);
-        setList(res.data);
+    if (!sessionStorage.getItem("list")) {
+      axios({
+        method: "get",
+        url: "/consumer/list",
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => {
+          Count(res.data.length);
+          setList(res.data);
+          sessionStorage.setItem("list", JSON.stringify(res.data));
+          AutoScroll();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      const list = JSON.parse(sessionStorage.getItem("list"));
+      Count(list.length);
+      setList(list);
+    }
   }, []);
 
   return (
@@ -164,16 +170,39 @@ const MainBody = (props) => {
             현재 <span id="count">0</span>개의 서비스가 DSM Auth와 함께합니다.
           </S.BigTitle>
           <S.ListWrapper id="scrollWrap">
-            {list.length != 0 &&
-              Array.isArray(list) &&
-              list.map((val) => (
-                <S.Item>
-                  <span>{val.name}</span>
-                  <a style={{ color: "white" }} href={val.domain_url}>
-                    {val.domain_url}
-                  </a>
-                </S.Item>
-              ))}
+            {list.length != 0
+              ? list.map((val) => (
+                  <S.Item>
+                    <span>{val.name}</span>
+                    <a style={{ color: "white" }} href={val.domain_url}>
+                      {val.domain_url}
+                    </a>
+                  </S.Item>
+                ))
+              : Array.apply(null, Array(5)).map((temp, i) => (
+                  <S.LoadingItem index={i}>
+                    <span
+                      style={{
+                        width: "250px",
+                        height: "100%",
+                        background: "#222222",
+                        borderRadius: "3px",
+                      }}
+                    >
+                      ㅤ
+                    </span>
+                    <span
+                      style={{
+                        width: "250px",
+                        height: "100%",
+                        background: "#222222",
+                        borderRadius: "3px",
+                      }}
+                    >
+                      ㅤ
+                    </span>
+                  </S.LoadingItem>
+                ))}
           </S.ListWrapper>
         </S.ContentBox>
       </S.Section>

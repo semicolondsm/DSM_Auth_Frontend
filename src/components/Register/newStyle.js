@@ -104,7 +104,7 @@ export const SingUpDes = styled.span`
   color: #c4c4c4;
 `;
 
-export const Agree = styled.p`
+export const Agree = styled.a`
   width: 80%;
   font-size: 14px;
   color: #b8b8b8;
@@ -112,6 +112,7 @@ export const Agree = styled.p`
   align-items: center;
   justify-content: flex-end;
   letter-spacing: -2px;
+  margin: 20px 0 0;
 
   @media only screen and (max-width: 768px) {
     transform: scale(0.9);

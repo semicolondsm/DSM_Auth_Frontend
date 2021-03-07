@@ -6,6 +6,8 @@ import axios from "axios";
 
 import { useHistory } from "react-router-dom";
 
+import Loading from "../Public/Loading/Loading";
+
 // 비번 확인 됨
 // 인증번호 확인 성공
 // 아이디 중복 체크 성공
@@ -25,6 +27,9 @@ const NewRegister = React.memo(() => {
     id: false,
   });
   const [count, setCount] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [eLoading, setELoading] = useState(false);
+  const [idLoading, setIdLoading] = useState(false);
   const timer = useRef();
   const check = useRef();
   // 처음 비번 / 두번째 인증코드 / 세번째 ???
@@ -66,6 +71,7 @@ const NewRegister = React.memo(() => {
     }
     const { id, psw, name, email, code } = value;
     if (state.id === true && state.psw === true) {
+      setLoading(true);
       axios({
         url: "/auth/signup",
         method: "post",
@@ -82,7 +88,7 @@ const NewRegister = React.memo(() => {
           history.push("/");
         })
         .catch((err) => {
-          console.log(err);
+          setLoading(false);
           alert("회원가입 실패 !");
         });
     } else {
@@ -102,14 +108,21 @@ const NewRegister = React.memo(() => {
     if (value.email === "") {
       alert("이메일을 입력하세요.");
       return;
-    } else if (/@dsm.hs.kr/.exec(value.email) === null) {
+    } else if (
+      !/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i.test(
+        value.email
+      )
+    ) {
       alert("이메일 양식이 맞지 않습니다.");
       return;
     } else if (count > 0) {
       alert("아직 인증번호를 다시 받을 수 없습니다.");
       return;
+    } else if (eLoading === true) {
+      alert("이메일 발송 중 입니다.");
+      return;
     }
-
+    setELoading(true);
     axios({
       url: "/auth/email",
       method: "post",
@@ -125,7 +138,7 @@ const NewRegister = React.memo(() => {
         }, 1000);
       })
       .catch((err) => {
-        console.log(err);
+        setELoading(false);
         if (err.response.data.code === 403) {
           alert("이미 회원가입한 이메일입니다.");
         } else {
@@ -144,6 +157,11 @@ const NewRegister = React.memo(() => {
       alert("이미 확인된 아이디 입니다.");
       return;
     }
+    if (idLoading === true) {
+      alert("아이디 체크중 입니다.");
+      return;
+    }
+    setIdLoading(true);
     axios({
       method: "post",
       url: "/auth/check/id",
@@ -159,6 +177,7 @@ const NewRegister = React.memo(() => {
         });
       })
       .catch((err) => {
+        setIdLoading(false);
         console.log(err);
         if (err.response.code === 405) {
           alert("아이디가 중복됩니다 !");
@@ -170,6 +189,7 @@ const NewRegister = React.memo(() => {
 
   return (
     <s.Wrapper>
+      {loading && <Loading isOn={loading} />}
       <s.Container>
         <s.SignUp>SIGN UP</s.SignUp>
         <s.InputWrapper>
@@ -251,7 +271,10 @@ const NewRegister = React.memo(() => {
             type="text"
           />
         </s.InputWrapper>
-        <s.Agree>
+        <s.Agree
+          target="_blank"
+          href="https://semicolondsm.github.io/imformation/"
+        >
           개인정보 수집 이용 동의
           <s.CheckBox id="asd" type="checkbox" ref={check} />
           <s.Label htmlFor="asd" />

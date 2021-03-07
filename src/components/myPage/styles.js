@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -13,16 +13,46 @@ export const MyContainer = styled.div`
   margin: 150px auto;
 `;
 
+const ani = keyframes`
+  0% {
+    background-position: -100px
+  }
+
+  40%, 100% {
+    background-position: 280px;
+  }
+`;
+
 export const UserName = styled.p`
   color: white;
   font-family: 나눔스퀘어;
   font-size: 56px;
   margin-bottom: 0;
+  display: flex;
+  align-items: flex-end;
   b {
     font-size: 34px;
     padding: 0 10px;
     color: #c4c4c4;
     font-weight: 500;
+  }
+
+  span {
+    background-color: rgb(34, 34, 34);
+    border-radius: 3px;
+    animation: ${ani} 2.5s infinite linear;
+    background-image: linear-gradient(
+      90deg,
+      rgb(34, 34, 34) 0px,
+      #333333 40px,
+      rgb(34, 34, 34) 80px
+    );
+    background-size: 600px;
+  }
+
+  span:last-child {
+    background-position: -100px;
+    animation: ${ani} 2.5s infinite linear 0.45s;
   }
 `;
 
@@ -30,6 +60,18 @@ export const UserEmail = styled.p`
   color: #c4c4c4;
   font-size: 22px;
   letter-spacing: 1px;
+  span {
+    background-color: rgb(34, 34, 34);
+    border-radius: 3px;
+    animation: ${ani} 2.5s infinite linear;
+    background-image: linear-gradient(
+      90deg,
+      rgb(34, 34, 34) 0px,
+      #333333 40px,
+      rgb(34, 34, 34) 80px
+    );
+    background-size: 600px;
+  }
 `;
 
 export const UserApp = styled.div`
@@ -162,8 +204,33 @@ export const Application = styled.div`
     margin-top: 1.5%;
     margin-bottom: 0;
   }
+  & > p > span {
+    background-color: #333333;
+    border-radius: 3px;
+    animation: ${ani} 2.5s infinite linear;
+    background-image: linear-gradient(
+      90deg,
+      #333333 0px,
+      #444444 40px,
+      #333333 80px
+    );
+    background-size: 600px;
+  }
+
+  & > p > span:last-child {
+    animation: ${ani} 2.5s infinite linear 0.45s;
+  }
 `;
 
+const ani2 = keyframes`
+  0% {
+    background-position: -100px
+  }
+
+  25%, 100% {
+    background-position: 280px;
+  }
+`;
 export const AppDetail = styled.div`
   width: 100%;
   display: flex;
@@ -173,6 +240,26 @@ export const AppDetail = styled.div`
   font-weight: 500;
   p {
     margin-top: 2%;
-    margin-bottom: 2%;e
+    margin-bottom: 2%;
+  }
+  p span {
+    background-color: #333333;
+    border-radius: 3px;
+    background-position: -100px;
+    animation: ${ani2} 2.5s infinite linear 0.425s;
+    background-image: linear-gradient(
+      90deg,
+      #333333 0px,
+      #444444 40px,
+      #333333 80px
+    );
+    background-size: 600px;
+  }
+  p:first-child span {
+    animation: ${ani2} 2.5s infinite linear;
+  }
+
+  p:last-child span {
+    animation: ${ani2} 2.5s infinite linear 0.85s;
   }
 `;

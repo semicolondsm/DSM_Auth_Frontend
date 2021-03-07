@@ -10,12 +10,15 @@ import logo from "../../assets/logo2.png";
 
 import LoginButton from "./LoginButton";
 
+import Loading from "../Public/Loading/Loading";
+
 const Login = (props) => {
   const [id, setId] = useState("");
   const [password, setPass] = useState("");
   const history = useHistory();
   const [Rcookie] = useCookies(["refresh-token"]);
   const [Acookie, Aset] = useCookies(["access-token"]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (Rcookie["refresh-token"] !== undefined) {
@@ -46,6 +49,7 @@ const Login = (props) => {
       alert("아이디나 비밀번호를 입력하세요.");
       return;
     }
+    setLoading(true);
     axios({
       url: "/dsmauth/login",
       method: "post",
@@ -60,6 +64,7 @@ const Login = (props) => {
         window.location.href = res.data.location;
       })
       .catch((err) => {
+        setLoading(false);
         switch (err.response.status) {
           case 401:
             alert("아이디나 비밀번호가 틀렸습니다.");
@@ -72,6 +77,7 @@ const Login = (props) => {
   };
   return (
     <S.Section bgColor="black">
+      {loading && <Loading isOn={loading} />}
       <S.Img
         onClick={() => {
           props.my === true && history.push("/");
@@ -93,8 +99,9 @@ const Login = (props) => {
             value={id}
             type="text"
             onChange={(e) => setId(e.target.value)}
+            id="id2"
           />
-          <S.Inter id="id1" on={id != "" ? true : false}>
+          <S.Inter htmlFor="id2" id="id1" on={id != "" ? true : false}>
             ID
           </S.Inter>
         </S.InputWrapper>
@@ -104,8 +111,13 @@ const Login = (props) => {
             type="password"
             onChange={(e) => setPass(e.target.value)}
             style={{ fontSize: "30px", paddingBottom: "5px" }}
+            id="ps1"
           />
-          <S.Inter id="password1" on={password != "" ? true : false}>
+          <S.Inter
+            htmlFor="ps1"
+            id="password1"
+            on={password != "" ? true : false}
+          >
             PASSWORD
           </S.Inter>
         </S.InputWrapper>

@@ -64,7 +64,14 @@ export const Count = (max) => {
   let number = 0;
   let isPro = false;
   let timer;
-
+  if (getScroll() > getDivTop("count") + 400) {
+    timer = setInterval(() => {
+      number += 1;
+      self.innerText = number;
+      if (number >= max) clearInterval(timer);
+    }, 1000 / max);
+    isPro = true;
+  }
   window.addEventListener("scroll", () => {
     if (pathname != window.location.pathname) return;
     if (getScroll() > getDivTop("count") + 400) {
@@ -89,6 +96,9 @@ export const AutoScroll = () => {
   const self = document.getElementById("scrollWrap");
   let isOn = false;
   let timer;
+  let scTop;
+  let sc;
+  let isKey = false;
 
   function easeOutSine(x) {
     return Math.sqrt(1 - Math.pow(x - 1, 2));
@@ -97,9 +107,9 @@ export const AutoScroll = () => {
   const scroll = () => {
     let count = 0;
     let prevNum = 0;
-    const temp = setInterval(() => {
+    sc = setInterval(() => {
       if (count >= 100) {
-        clearInterval(temp);
+        clearInterval(sc);
         prevNum = 0;
         return;
       }
@@ -115,10 +125,9 @@ export const AutoScroll = () => {
     let count = 0;
     let prevNum = 0;
     const sh = self.scrollHeight;
-
-    const temp = setInterval(() => {
+    scTop = setInterval(() => {
       if (count >= sh) {
-        clearInterval(temp);
+        clearInterval(scTop);
         prevNum = 0;
         return;
       }
@@ -130,6 +139,18 @@ export const AutoScroll = () => {
     }, 1000 / sh);
   };
 
+  if (getScroll() > getDivTop("scrollWrap") + 800) {
+    const sh = self.scrollHeight;
+    const ch = self.clientHeight;
+    timer = setInterval(() => {
+      if (self.scrollTop + ch === sh) {
+        scrollTop();
+      } else {
+        scroll();
+      }
+    }, 4000);
+    isOn = true;
+  }
   window.addEventListener("scroll", () => {
     if (pathname !== window.location.pathname) return;
     const sh = self.scrollHeight;
@@ -160,6 +181,31 @@ export const AutoScroll = () => {
       } else {
         scroll();
       }
-    }, 3500);
+    }, 4000);
+  });
+
+  self.addEventListener("mousedown", () => {
+    clearInterval(sc);
+    clearInterval(scTop);
+    clearInterval(timer);
+    isKey = true;
+  });
+
+  window.addEventListener("mouseup", () => {
+    if (!isKey) return;
+    const sh = self.scrollHeight;
+    const ch = self.clientHeight;
+    if (getScroll() > getDivTop("scrollWrap") + 800) {
+      if (isOn) return;
+      timer = setInterval(() => {
+        if (self.scrollTop + ch === sh) {
+          scrollTop();
+        } else {
+          scroll();
+        }
+      }, 4000);
+      isOn = true;
+    }
+    isKey = false;
   });
 };

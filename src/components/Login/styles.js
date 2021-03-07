@@ -43,16 +43,18 @@ export const InputWrapper = styled.div`
   }
 `;
 
-export const Inter = styled.p`
+export const Inter = styled.label`
   position: absolute;
   top: 0;
   left: 15px;
   transition: all 0.25s;
-  transform: translateY(-30%);
+  transform: translateY(35%);
   font-size: 17px;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 700;
   color: #4a4a4a;
+  cursor: text;
+  user-select: none;
 
   @media only screen and (max-width: 768px) {
     font-size: 15px;
@@ -61,8 +63,8 @@ export const Inter = styled.p`
     ${(props) =>
       props.on === true &&
       css`
-        top: -50%;
-        transform: translateY(-100%);
+        top: 0;
+        transform: translateY(-125%);
         left: 12px;
         font-size: 16px;
         color: white;
@@ -72,8 +74,8 @@ export const Inter = styled.p`
   ${(props) =>
     props.on === true &&
     css`
-      top: -50%;
-      transform: translateY(-100%);
+      top: 0;
+      transform: translateY(-125%);
       left: 12px;
       font-size: 16px;
       color: white;
@@ -94,8 +96,8 @@ export const Input = styled.input`
   font-family: "Noto Sans KR", sans-serif;
 
   &:focus + ${Inter} {
-    top: -50%;
-    transform: translateY(-100%);
+    top: 0;
+    transform: translateY(-125%);
     left: 12px;
     font-size: 16px;
     color: white;

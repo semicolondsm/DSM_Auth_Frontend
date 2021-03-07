@@ -422,3 +422,44 @@ export const ProfileSub = styled.a`
   white-space: nowrap;
   overflow: hidden;
 `;
+
+const breath = keyframes`
+  0% {
+    background: #222222;
+  }
+
+  14% {
+    background: #333333;
+  }
+  
+  28% {
+    background: #222222;
+  }
+  100% {
+    background: #222222;
+  }
+`;
+
+export const LoadingItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 17px;
+  color: white;
+  border-bottom: 2px solid rgb(190, 190, 190);
+  padding: 20px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #eeeeee;
+  &:first-child {
+    border-top: 1px solid rgb(190, 190, 190);
+  }
+  & span {
+    animation-name: ${breath};
+    animation-timing-function: ease-out;
+    animation-duration: 3.5s;
+    animation-fill-mode: backwards;
+    animation-delay: ${(props) => props.index * 0.65 + 0.7}s;
+    animation-iteration-count: infinite;
+  }
+`;
