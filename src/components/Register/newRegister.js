@@ -223,12 +223,12 @@ const NewRegister = React.memo(() => {
         });
       })
       .catch((err) => {
-        setIdLoading(false);
-        console.log(err);
-        if (err.response.code === 405) {
-          alert("아이디가 중복됩니다 !");
-        } else {
-          alert("요청 오류");
+        switch (err.response.status) {
+          case 405:
+            alert("아이디가 중복됩니다 !");
+            break;
+          default:
+            alert("요청 오류");
         }
       });
   };

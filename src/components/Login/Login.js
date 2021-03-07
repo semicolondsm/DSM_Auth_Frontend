@@ -82,8 +82,8 @@ const Login = (props) => {
             });
             history.push("/");
           })
-          .catch((err) => {
-            console.log(err);
+          .catch(() => {
+            history.push("/");
           });
       })
       .catch((err) => {

@@ -1,7 +1,6 @@
 import * as S from "./styles";
 
 const Loading = (props) => {
-  console.log(props.isOn);
   return (
     <S.Back is={props.isOn}>
       <S.Svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">

@@ -8,8 +8,11 @@ import React, { useEffect, useState } from "react";
 
 import Loading from "../Public/Loading/Loading";
 
+import { useHistory } from "react-router-dom";
+
 const RegisterModal = ({ style, setModalOn }) => {
-  const [Acookie] = useCookies(["access-token"]);
+  const [Acookie, removeA] = useCookies(["access-token"]);
+  const history = useHistory();
   const [AppValue, setValue] = useState({
     name: "",
     domain: "",
@@ -37,6 +40,10 @@ const RegisterModal = ({ style, setModalOn }) => {
       return;
     }
     setLoading(true);
+    if (loading) {
+      alert("등록 중 입니다.");
+      return;
+    }
     axios({
       method: "post",
       url: "/consumer/registration",
@@ -56,14 +63,21 @@ const RegisterModal = ({ style, setModalOn }) => {
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err);
-        alert("등록에 실패했습니다.");
+        switch (err.response.status) {
+          case 401:
+            removeA("access-token");
+            history.replace("/");
+            alert("다시 로그인 하세요");
+          default:
+            alert("서버 에러");
+            return;
+        }
       });
   };
 
   return (
     <>
-      {loading && <Loading />}
+      {loading && <Loading isOn={loading} />}
       <S.ModalWrapper
         style={
           modal
@@ -72,7 +86,7 @@ const RegisterModal = ({ style, setModalOn }) => {
             ? { display: "none" }
             : { display: "none" }
         }
-        onClick={(e) => {
+        onClick={() => {
           setModalOn();
         }}
       />
