@@ -42,7 +42,6 @@ const MyPage = (props) => {
           console.log(err);
         });
     } else {
-      console.log(JSON.parse(sessionStorage.getItem("infor")));
       setMyinfor(JSON.parse(sessionStorage.getItem("infor")));
     }
 
