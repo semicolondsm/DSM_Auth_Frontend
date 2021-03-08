@@ -17,7 +17,7 @@ const Login = (props) => {
   const [password, setPass] = useState("");
   const history = useHistory();
   const [Rcookie, Rset] = useCookies(["refresh-token"]);
-  const [Acookie, Aset] = useCookies(["access-token"]);
+  const [AToken, Aset] = useCookies(["access-token"]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
