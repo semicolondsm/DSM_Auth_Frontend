@@ -43,11 +43,11 @@ const Login = (props) => {
           })
             .then((res) => {
               sessionStorage.setItem("infor", JSON.stringify(res.data));
+              history.push("/");
             })
             .catch((err) => {
               console.log(err);
             });
-          history.push("/");
         })
         .catch((err) => {
           setLoading(false);
@@ -104,11 +104,11 @@ const Login = (props) => {
             })
               .then((res) => {
                 sessionStorage.setItem("infor", JSON.stringify(res.data));
+                history.push("/");
               })
               .catch((err) => {
                 console.log(err);
               });
-            history.push("/");
           })
           .catch(() => {
             history.push("/");
