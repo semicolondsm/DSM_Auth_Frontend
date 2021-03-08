@@ -42,11 +42,16 @@ const Login = (props) => {
             },
           })
             .then((res) => {
-              sessionStorage.setItem("infor", JSON.stringify(res.data));
+              sessionStorage.setItem(
+                "infor",
+                JSON.stringify(res.data["access-token"])
+              );
               history.push("/");
             })
             .catch((err) => {
               console.log(err);
+              setLoading(false);
+              history.push("/");
             });
         })
         .catch((err) => {
@@ -99,7 +104,7 @@ const Login = (props) => {
               method: "get",
               url: "/v1/info/basic",
               headers: {
-                "access-token": `Bearer ${AToken}`,
+                "access-token": `Bearer ${res.data["access-token"]}`,
               },
             })
               .then((res) => {
@@ -108,6 +113,8 @@ const Login = (props) => {
               })
               .catch((err) => {
                 console.log(err);
+                setLoading(false);
+                history.push("/");
               });
           })
           .catch(() => {
