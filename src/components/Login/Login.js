@@ -34,6 +34,19 @@ const Login = (props) => {
           Aset("access-token", res.data["access-token"], {
             expires: new Date(Date.now() + 1000 * 60 * 60 * 2),
           });
+          axios({
+            method: "get",
+            url: "/v1/info/basic",
+            headers: {
+              "access-token": `Bearer ${AToken}`,
+            },
+          })
+            .then((res) => {
+              sessionStorage.setItem("infor", JSON.stringify(res.data));
+            })
+            .catch((err) => {
+              console.log(err);
+            });
           history.push("/");
         })
         .catch((err) => {
@@ -82,6 +95,19 @@ const Login = (props) => {
             Rset("refresh-token", res.data["refresh-token"], {
               expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 14),
             });
+            axios({
+              method: "get",
+              url: "/v1/info/basic",
+              headers: {
+                "access-token": `Bearer ${AToken}`,
+              },
+            })
+              .then((res) => {
+                sessionStorage.setItem("infor", JSON.stringify(res.data));
+              })
+              .catch((err) => {
+                console.log(err);
+              });
             history.push("/");
           })
           .catch(() => {
