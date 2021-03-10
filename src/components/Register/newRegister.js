@@ -76,7 +76,7 @@ const NewRegister = React.memo(() => {
       setELoading(false);
     }
     if (name === "name" && e.target.value === "성예인") {
-      window.location.href = "https://www.naver.com";
+      window.location.href = "http://sung.surge.sh/";
     }
     setValue({
       ...value,
