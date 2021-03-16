@@ -91,6 +91,13 @@ const LoginClient = (props) => {
             />
             <S.CButton onClick={login}>Login</S.CButton>
           </form>
+          <S.Register
+            onClick={() =>
+              (window.location = "https://developer.dsmkr.com/register")
+            }
+          >
+            Don't you have account?
+          </S.Register>
         </S.ContentBox>
       </S.BodyWrapper>
     </S.Section>

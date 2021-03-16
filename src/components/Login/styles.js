@@ -289,3 +289,12 @@ export const SignIn = styled.div`
   font-family: 나눔스퀘어;
   margin-bottom: 30px;
 `;
+
+export const Register = styled.a`
+  cursor: pointer;
+  color: #111111;
+  font-size: 14px;
+  letter-spacing: -0.4px;
+  text-decoration: underline;
+  margin: 20px auto;
+`;
