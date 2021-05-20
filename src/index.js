@@ -11,12 +11,12 @@ import axios from "axios";
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
 ReactDOM.render(
-  <React.StrictMode>
-    <CookiesProvider>
-      <App />
-    </CookiesProvider>
-  </React.StrictMode>,
-  document.getElementById("root")
+    <React.StrictMode>
+        <CookiesProvider>
+            <App />
+        </CookiesProvider>
+    </React.StrictMode>,
+    document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
