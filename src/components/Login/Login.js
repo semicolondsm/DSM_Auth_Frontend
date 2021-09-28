@@ -63,8 +63,8 @@ const Login = (props) => {
 
     const login = (e) => {
         e.preventDefault();
-        const redirect_url = process.env.REACT_APP_REDIRECT_URL;
-        const client_id = process.env.REACT_APP_CLIENT_ID;
+        const redirect_url = 'https://dsm-auth.vercel.app/oauth/dsmauth/redirect';
+        const client_id = 'e6c15ee16718494f89de21eb19b4aae9';
         if (id === "" || password === "") {
             alert("아이디나 비밀번호를 입력하세요.");
             return;
@@ -82,8 +82,8 @@ const Login = (props) => {
         })
             .then((res) => {
                 const code = res.data.location.split("?code=")[1];
-                const client_id = process.env.REACT_APP_CLIENT_ID;
-                const client_secret = process.env.REACT_APP_CLIENT_SECRET;
+                const client_id = 'e6c15ee16718494f89de21eb19b4aae9';
+                const client_secret = '3fde1f3dd29f4d3aa81f423c7731b4a9';
                 axios({
                     method: "post",
                     url: "/dsmauth/token",
